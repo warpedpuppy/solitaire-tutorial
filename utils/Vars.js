@@ -1,4 +1,5 @@
 const VARS = {
+    deck: [],
     gameBoard: new PIXI.Container(),
     build: {
         cardWidth: 100,
