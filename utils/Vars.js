@@ -1,6 +1,5 @@
 const VARS = {
     gameBoard: new PIXI.Container(),
-    stage: undefined,
     build: {
         cardWidth: 100,
         cardHeight: 150,
@@ -8,9 +7,6 @@ const VARS = {
         canvasHeight: 800,
         suits: ["club", "diamond", "heart", "spade"],
         rank: ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
-    },
-    spacing: {
-
     }
 }
 export default VARS;

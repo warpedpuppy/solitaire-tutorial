@@ -14,5 +14,4 @@ import Solitaire from './Solitaire.js';
     
     Solitaire.build();
 
-
 })()
