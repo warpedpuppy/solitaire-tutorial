@@ -1,5 +1,5 @@
 import VARS from '../utils/Vars.js';
-const Card =  function() {
+const Card =  function () {
     return {
         rank: undefined,
         suit: undefined,
