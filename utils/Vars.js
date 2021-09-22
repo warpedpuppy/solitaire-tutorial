@@ -1,13 +1,23 @@
 const VARS = {
     deck: [],
-    gameBoard: new PIXI.Container(),
+    nonCardAssets: [],
+    drawPile: [],
+    flipPile: [],
+    piles: {},
+    slots: [],
+    resetDrawPileButton: undefined,
+    spacing: {
+        buffer: 10,
+        buffer_larger: 40,
+        slot_spacer: 50
+    },
     build: {
         cardWidth: 100,
         cardHeight: 150,
         canvasWidth: 1000,
         canvasHeight: 800,
-        suits: ["club", "diamond", "heart", "spade"],
-        rank: ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
+        suits: ["clubs", "diamonds", "hearts", "spades"],
+        ranks: ["ace", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king"],
     }
 }
 export default VARS;
