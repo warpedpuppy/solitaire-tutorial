@@ -5,26 +5,23 @@
     var ctx = canvas.getContext('2d');
 
     var img = new Image();
+    const suits = ["hearts", "clubs", "spades", "diamonds"];
+    const ranks = ["ace", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king"]
     img.src = 'bmps/sample-card-1.png';
     img.value = 1;
     const cards = []
-    img.onload = function() {
 
-        // create pattern
-        cards.push({graphic: img, x: 0, y:  0, value: 1, z: 1})
-      
- 
+    suits.forEach( (suit, i) => {
+        ranks.forEach( (rank, j) => {
+            let img = new Image();
+            // img.src = `bmps/card_bmps/${rank}_${suit}.png`;
+            img.src = `bmps/card_bmps/card_back.png`;
+            cards.push({graphic: img, cardFront:`bmps/card_bmps/${rank}_${suit}.png`, cardBack: `bmps/card_bmps/card_back.png`, x: j * 50, y:  i * 100, value: 1, z: 1})
+        })
+    })
     
-      }
 
-      var img2 = new Image();
-    img2.src = 'bmps/sample-card-2.png';
-      img2.value = 2;
-    img2.onload = function() {
 
-        cards.push({graphic: img2, x: 50, y:  50,value: 2, z: 2})
-      
-    }
     let mousePoint = {}, drag = false, xDiff, yDiff, activeCard, over = [], hit;
     canvas.addEventListener('mousemove', e => {
        mousePoint = {x: e.clientX, y: e.clientY}
@@ -34,7 +31,7 @@
     canvas.addEventListener('mousedown', e => {
 
         cards.forEach( (card, i) => {
-            const { graphic, x, y, value, z } = card;
+            const { graphic, cardFront, x, y, value, z } = card;
             let rect = {x, y, width: 100, height: 150};
             hit = pointRectangleCollisionDetection(mousePoint, rect);
             if (hit) {
@@ -42,6 +39,7 @@
                 activeCard = i;
                 xDiff = mousePoint.x - cards[i].x;
                 yDiff = mousePoint.y - cards[i].y;
+                graphic.src = cardFront;
                
             } 
         })
