@@ -59,8 +59,9 @@ const Deal = {
                 card = deck[this.cardCounter];
                 
                 
-                card.x = xOffset + (this.startX + (VARS.build.cardWidth + VARS.spacing.buffer) * j);
-                card.y = this.startY + (VARS.spacing.buffer * verticalSpacer);
+                let x = xOffset + (this.startX + (VARS.build.cardWidth + VARS.spacing.buffer) * j);
+                let y = this.startY + (VARS.spacing.buffer * verticalSpacer);
+                card.setPosition({x, y})
                 // }
                 // card.setPosition(cardPosition);
                 
@@ -71,9 +72,9 @@ const Deal = {
                 // card.setDrawPile(false);
                 
                 if (j === 0) {
-                    card.img.src = card.cardFront;
+                    card.reveal(true);
                 } else {
-                    card.img.src = card.cardBack;
+                    card.reveal(false);
                 }
 
                 this.cardCounter++;
@@ -106,11 +107,9 @@ const Deal = {
 
         arr.forEach(card => {
 
-            // card.setDrawPile(true);
-            card.x = xOffset;
-            card.y = yVal;
-            card.img.src = card.cardBack;
-            // card.addToGameBoard()
+            card.setDrawPile(true);
+            card.setPosition({x: xOffset, y: yVal});
+            card.reveal(false);
             yVal += 0.25;
             if (init) VARS.drawPile.push(card);
 

@@ -1,6 +1,7 @@
 const VARS = {
     deck: [],
     nonCardAssets: [],
+    cardsWithListeners: [],
     drawPile: [],
     flipPile: [],
     piles: {},

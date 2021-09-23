@@ -8,7 +8,7 @@ import Deck from './cards/Deck.js';
     var ctx = canvas.getContext('2d');
 
     Deck.build();
-    const { deck } = VARS;
+    const { deck, cardsWithListeners } = VARS;
     const { cardWidth, cardHeight } = VARS.build;
 
     Deal.start();
@@ -17,7 +17,7 @@ import Deck from './cards/Deck.js';
 
     let mousePoint = {}, drag = false, xDiff, yDiff, activeCard, over = [], hit;
     canvas.addEventListener('mousemove', e => {
-       mousePoint = {x: e.clientX, y: e.clientY}
+       mousePoint = {x: e.pageX, y: e.pageY}
 
     })
 
@@ -25,22 +25,24 @@ import Deck from './cards/Deck.js';
 
         // determine active card
         deck.forEach( (card, i) => {
-            const { x, y } = card;
-            let rect = {x, y, width: cardWidth, height: cardHeight};
-            hit = pointRectangleCollisionDetection(mousePoint, rect);
-            if (hit) {
-                drag = true;
-                activeCard = i;
-                xDiff = mousePoint.x - deck[i].x;
-                yDiff = mousePoint.y - deck[i].y;
-               
-            } 
+            const { x, y, clickable } = card;
+            if (clickable) {
+                let rect = {x, y, width: cardWidth, height: cardHeight};
+                hit = pointRectangleCollisionDetection(mousePoint, rect);
+                if (hit) {
+                    drag = true;
+                    activeCard = i;
+                    xDiff = mousePoint.x - deck[i].x;
+                    yDiff = mousePoint.y - deck[i].y;
+                
+                } 
+            }
+            
         })
         //move to top
         if (activeCard !== undefined) {
             let card = deck.splice(activeCard, 1)[0];
-            // deck.push(card)
-            deck[deck.length] = card; 
+            deck.push(card)
             activeCard = deck.length - 1;
         }
     })
@@ -73,11 +75,14 @@ import Deck from './cards/Deck.js';
         })
 
         deck.forEach( card => {
-            const { img, x, y } = card;
+            const { img, x, y, clickable } = card;
             ctx.drawImage(img, x, y);
-            let rect = {x, y, width: 100, height: 150};
-            let hit = pointRectangleCollisionDetection(mousePoint, rect);
-            over.push(hit);
+            if (clickable) {
+                let rect = {x, y, width: 100, height: 150};
+                let hit = pointRectangleCollisionDetection(mousePoint, rect);
+                over.push(hit);
+            }
+            
         })
 
         if (drag) {
