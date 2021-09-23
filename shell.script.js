@@ -39,7 +39,8 @@ import Deck from './cards/Deck.js';
         //move to top
         if (activeCard !== undefined) {
             let card = deck.splice(activeCard, 1)[0];
-            deck.push(card)
+            // deck.push(card)
+            deck[deck.length] = card; 
             activeCard = deck.length - 1;
         }
     })

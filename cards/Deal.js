@@ -13,22 +13,24 @@ const Deal = {
 
         // Deck.shuffle();
 
-        // PILES
-        let { adjustedCardCounter } = this.createCardPiles();
-    //    this.createDrawPileResetButton();
+        let gameBoardWidth = (VARS.build.cardWidth * 8)  + (VARS.spacing.buffer * 6 ) + VARS.spacing.buffer_larger;
+        let xOffset = (document.getElementById('tutorial').width - gameBoardWidth) / 2;
 
-        //  // DRAW PILE
+        // PILES
+        let { adjustedCardCounter } = this.createCardPiles(xOffset);
+       this.createDrawPileResetButton(xOffset);
+
+        // DRAW PILE
          let arr = VARS.deck.slice(adjustedCardCounter, 52)
-         this.createDrawPile( arr, true);
+         this.createDrawPile( arr, true, xOffset);
 
         // // SLOTS 
-        // this.createSlots();
-        // VARS.gameBoard.addChild(VARS.slotCont)
-
-        //  VARS.gameBoard.x = (VARS.build.canvasWidth - VARS.gameBoard.width) / 2;
-        //  VARS.gameBoard.y = 20;
+        this.createSlots();
+      
     },
-    createCardPiles() {
+    createCardPiles(xOffset) {
+
+      
 
         for (let i = 0; i < this.loopingQ; i++) {
 
@@ -39,7 +41,7 @@ const Deal = {
                 img: markerImage,
                 marker: true,
                 index: i,
-                x: this.startX + (VARS.build.cardWidth + VARS.spacing.buffer) * i,
+                x: xOffset + (this.startX + (VARS.build.cardWidth + VARS.spacing.buffer) * i),
                 y: this.startY,
 
             }
@@ -50,14 +52,14 @@ const Deal = {
         let card, verticalSpacer = 0;
 
         const { deck } = VARS;
-
+        console.log(deck.length)
         while (this.loopingQ > 0) {
             for (let j = 0; j < this.loopingQ; j++) {
 
                 card = deck[this.cardCounter];
                 
                 
-                card.x = this.startX + (VARS.build.cardWidth + VARS.spacing.buffer) * j;
+                card.x = xOffset + (this.startX + (VARS.build.cardWidth + VARS.spacing.buffer) * j);
                 card.y = this.startY + (VARS.spacing.buffer * verticalSpacer);
                 // }
                 // card.setPosition(cardPosition);
@@ -85,22 +87,28 @@ const Deal = {
         }
         return { adjustedCardCounter: this.cardCounter, adjustedStartY: this.startY }
     },
-    createDrawPileResetButton(startY) {
-        VARS.resetDrawPileButton = new PIXI.Sprite(PIXI.Texture.from('/bmps/marker.png'));
-        VARS.resetDrawPileButton.x = 0;
-        VARS.resetDrawPileButton.y = this.startY;
-        VARS.resetDrawPileButton.visible = false;
-        VARS.gameBoard.addChild(VARS.resetDrawPileButton);
+    createDrawPileResetButton(startY, xOffset) {
+        let img = new Image();
+        img.src = '/bmps/marker.png';
+        VARS.resetDrawPileButton = {
+            img,
+            x: xOffset,
+            y : this.startY,
+            visible: false,
+            resetDraw: true,
+        }
+        
+        VARS.nonCardAssets.push(VARS.resetDrawPileButton)
     },
-    createDrawPile(arr, init) {
+    createDrawPile(arr, init, xOffset) {
 
         let yVal = VARS.build.cardHeight + VARS.spacing.buffer_larger;
 
         arr.forEach(card => {
 
             // card.setDrawPile(true);
-            card.x =0;
-            card.y =yVal;
+            card.x = xOffset;
+            card.y = yVal;
             card.img.src = card.cardBack;
             // card.addToGameBoard()
             yVal += 0.25;
@@ -111,20 +119,26 @@ const Deal = {
     },
     createSlots() {
         let width = 0;
+        let allFourSlotWidths = (VARS.build.cardWidth + VARS.spacing.slot_spacer) * 4;
+        let xOffset = (document.getElementById('tutorial').width - allFourSlotWidths) / 2;
         for (let i = 0; i < 4; i++) {
-            let slot = new PIXI.Container();
-            let graphic = new PIXI.Sprite(PIXI.Texture.from(`/bmps/slot${VARS.build.suits[i].charAt(0).toUpperCase()}${VARS.build.suits[i].substring(1, VARS.build.suits[i].length)}s.png`)); 
-            slot.suit = VARS.build.suits[i];
-            slot.addChild(graphic)
-            slot.rank = 1;
-            slot.x = (VARS.build.cardWidth + VARS.spacing.slot_spacer) * i;
+            let img = new Image();
+            img.src = `/bmps/slot${VARS.build.suits[i].charAt(0).toUpperCase()}${VARS.build.suits[i].substring(1, VARS.build.suits[i].length)}.png`; 
+
+            let slot = {
+                img,
+                suit: VARS.build.suits[i],
+                rank: 1,
+                x: xOffset + ((VARS.build.cardWidth + VARS.spacing.slot_spacer) * i),
+                y:0
+            }
+
+            
             width += VARS.build.cardWidth + VARS.spacing.slot_spacer ;
             VARS.slots.push(slot);
-            VARS.slotCont.addChild(slot);
+            VARS.nonCardAssets.push(slot);
         }
         width = ( VARS.build.cardWidth + VARS.spacing.slot_spacer) * 3;
-        VARS.slotCont.x = (( VARS.gameBoard.width - width) / 2) - (VARS.build.cardWidth / 2);
-        VARS.gameBoard.addChild(VARS.slotCont)
     }
 }
 export default Deal;

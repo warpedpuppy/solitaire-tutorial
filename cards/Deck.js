@@ -5,15 +5,16 @@ const Deck = {
         const { deck } = VARS;
         const { suits, ranks } = VARS.build;
         let value = 1;
-
+        let temp = []
         suits.forEach( (suit, i) => {
             ranks.forEach( (rank, j) => {
                 let card = Card();
                 card.build(rank, suit, value, j * 50, i * 100);
-                deck.push(card);
+                deck.push(card)
                 value ++;
             })
         })
+
     },
     layOutInGrid () {
         let cardCounter = 0;
