@@ -9,7 +9,7 @@ const Card =  function () {
         x: undefined,
         y: undefined,
         value: undefined,
-        clickable: true,
+        clickable: false,
         drawPile: false,
         build: function (rank, suit, value, x, y) {
             this.rank = rank + 1;
@@ -36,6 +36,9 @@ const Card =  function () {
         },
         reveal: function (boolean) {
             this.img.src = boolean ? this.cardFront : this.cardBack ;
+        },
+        setClickability: function (boolean) {
+            this.clickable = boolean;
         },
         setDrawPile: function (boolean) {
             this.drawPile = boolean;

@@ -7,6 +7,7 @@ const VARS = {
     piles: {},
     slots: [],
     resetDrawPileButton: undefined,
+    flipPileReset: false,
     spacing: {
         buffer: 10,
         buffer_larger: 40,

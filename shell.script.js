@@ -1,7 +1,7 @@
 
 import VARS from './utils/Vars.js';
 import Deal from './cards/Deal.js';
-import Card from './cards/Card.js';
+import DrawPileAction from './action/DrawPileAction.js';
 import Deck from './cards/Deck.js';
 (function(){
     var canvas = document.getElementById('tutorial');
@@ -23,9 +23,12 @@ import Deck from './cards/Deck.js';
 
     canvas.addEventListener('mousedown', e => {
 
+       
+
         // determine active card
         deck.forEach( (card, i) => {
-            const { x, y, clickable } = card;
+            const { x, y, clickable, drawPile } = card;
+            
             if (clickable) {
                 let rect = {x, y, width: cardWidth, height: cardHeight};
                 hit = pointRectangleCollisionDetection(mousePoint, rect);
@@ -48,6 +51,18 @@ import Deck from './cards/Deck.js';
     })
 
     canvas.addEventListener('mouseup', e => {
+
+        if (VARS.flipPileReset) {
+            let rect = {x: VARS.resetDrawPileButton.x, y: VARS.resetDrawPileButton.y, width: cardWidth, height: cardHeight};
+            hit = pointRectangleCollisionDetection(mousePoint, rect);
+            if (hit) {
+                DrawPileAction.resetDrawPileHandler();
+                return;
+            }
+        } else if (activeCard && VARS.deck[activeCard].drawPile) {
+            DrawPileAction.drawPileClickHandler();
+        }
+
 
         drag = false;
         activeCard = undefined;
@@ -85,7 +100,7 @@ import Deck from './cards/Deck.js';
             
         })
 
-        if (drag) {
+        if (drag && !deck[activeCard].drawPile) {
             deck[activeCard].x = mousePoint.x - xDiff;
             deck[activeCard].y = mousePoint.y - yDiff;
         } 

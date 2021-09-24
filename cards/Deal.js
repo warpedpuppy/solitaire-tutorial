@@ -6,6 +6,7 @@ const Deal = {
     startX: 0,
     startY: 0,
     totalColumns: 7,
+    xOffset: 0,
     start: function () {
 
         this.startX = VARS.build.cardWidth + VARS.spacing.buffer_larger;
@@ -14,8 +15,8 @@ const Deal = {
         // Deck.shuffle();
 
         let gameBoardWidth = (VARS.build.cardWidth * 8)  + (VARS.spacing.buffer * 6 ) + VARS.spacing.buffer_larger;
-        let xOffset = (document.getElementById('tutorial').width - gameBoardWidth) / 2;
-
+        this.xOffset = (document.getElementById('tutorial').width - gameBoardWidth) / 2;
+        let xOffset = this.xOffset;
         // PILES
         let { adjustedCardCounter } = this.createCardPiles(xOffset);
        this.createDrawPileResetButton(xOffset);
@@ -88,33 +89,38 @@ const Deal = {
         }
         return { adjustedCardCounter: this.cardCounter, adjustedStartY: this.startY }
     },
-    createDrawPileResetButton(startY, xOffset) {
+    createDrawPileResetButton(xOffset) {
         let img = new Image();
         img.src = '/bmps/marker.png';
         VARS.resetDrawPileButton = {
             img,
             x: xOffset,
             y : this.startY,
-            visible: false,
+            clickable: false,
             resetDraw: true,
         }
         
         VARS.nonCardAssets.push(VARS.resetDrawPileButton)
     },
-    createDrawPile(arr, init, xOffset) {
+    createDrawPile(arr, init) {
 
         let yVal = VARS.build.cardHeight + VARS.spacing.buffer_larger;
-
+        let topCard;
         arr.forEach(card => {
 
             card.setDrawPile(true);
-            card.setPosition({x: xOffset, y: yVal});
+            card.setPosition({x: this.xOffset, y: yVal});
             card.reveal(false);
+            
             yVal += 0.25;
-            if (init) VARS.drawPile.push(card);
+            if (init) {
+                VARS.drawPile.push(card)
+                // VARS.cardsWithListeners.push(card)};
+            };
+            topCard = card;
 
         })
-
+        topCard.setClickability(true);
     },
     createSlots() {
         let width = 0;
