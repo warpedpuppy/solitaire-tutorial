@@ -27,16 +27,19 @@ import Deck from './cards/Deck.js';
 
         // determine active card
         deck.forEach( (card, i) => {
-            const { x, y, clickable, drawPile } = card;
+            const { x, y, clickable } = card;
             
-            if (clickable) {
+            if ( clickable ) {
                 let rect = {x, y, width: cardWidth, height: cardHeight};
                 hit = pointRectangleCollisionDetection(mousePoint, rect);
                 if (hit) {
+                    
                     drag = true;
                     activeCard = i;
-                    xDiff = mousePoint.x - deck[i].x;
-                    yDiff = mousePoint.y - deck[i].y;
+                    card.storePosition();
+                    xDiff = mousePoint.x - card.x;
+                    yDiff = mousePoint.y - card.y;
+                    console.log(activeCard)
                 
                 } 
             }
@@ -57,13 +60,17 @@ import Deck from './cards/Deck.js';
             hit = pointRectangleCollisionDetection(mousePoint, rect);
             if (hit) {
                 DrawPileAction.resetDrawPileHandler();
-                console.log(VARS.deck.indexOf(VARS.resetDrawPileButton))
                 VARS.resetDrawPileButton.clickable = false;
-                // VARS.deck.splice(VARS.deck.indexOf(VARS.resetDrawPileButton), 1)
                 return;
+            } else {
+                VARS.deck[activeCard].resetPositionToStore();
             }
-        } else if (activeCard && VARS.deck[activeCard].drawPile) {
+
+
+        } else if (activeCard && VARS.deck[activeCard].drawPile && !VARS.flipPile.includes(VARS.deck[activeCard])) {
             DrawPileAction.drawPileClickHandler();
+        } else if (activeCard) {
+            VARS.deck[activeCard].resetPositionToStore();
         }
 
 
@@ -83,7 +90,7 @@ import Deck from './cards/Deck.js';
     }
      
     function draw () {
-        
+
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         over = [];
