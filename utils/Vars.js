@@ -1,4 +1,5 @@
 const VARS = {
+    allVisualAssets: [],
     deck: [],
     nonCardAssets: [],
     cardsWithListeners: [],

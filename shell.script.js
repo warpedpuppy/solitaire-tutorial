@@ -57,6 +57,9 @@ import Deck from './cards/Deck.js';
             hit = pointRectangleCollisionDetection(mousePoint, rect);
             if (hit) {
                 DrawPileAction.resetDrawPileHandler();
+                console.log(VARS.deck.indexOf(VARS.resetDrawPileButton))
+                VARS.resetDrawPileButton.clickable = false;
+                // VARS.deck.splice(VARS.deck.indexOf(VARS.resetDrawPileButton), 1)
                 return;
             }
         } else if (activeCard && VARS.deck[activeCard].drawPile) {
@@ -80,18 +83,17 @@ import Deck from './cards/Deck.js';
     }
      
     function draw () {
+        
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         over = [];
 
-        VARS.nonCardAssets.forEach( item => {
-            const { img, x, y } = item;
-            ctx.drawImage(img, x, y);
-        })
-
-        deck.forEach( card => {
+        VARS.allVisualAssets.forEach( card => {
             const { img, x, y, clickable } = card;
+           
+    
             ctx.drawImage(img, x, y);
+
             if (clickable) {
                 let rect = {x, y, width: 100, height: 150};
                 let hit = pointRectangleCollisionDetection(mousePoint, rect);
@@ -100,12 +102,14 @@ import Deck from './cards/Deck.js';
             
         })
 
+        cursor(over.includes(true));
+
         if (drag && !deck[activeCard].drawPile) {
             deck[activeCard].x = mousePoint.x - xDiff;
             deck[activeCard].y = mousePoint.y - yDiff;
         } 
 
-        cursor(over.includes(true));
+        
 
         requestAnimationFrame(draw);
     }

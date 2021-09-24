@@ -12,7 +12,11 @@ const DrawPileAction =  {
 
         for (let i = 0; i < top3.length; i++) {
             card = top3[i];
-            // ListenerManager.removeAllListeners(card);
+            let index = VARS.allVisualAssets.indexOf(card);
+
+            let tempCard = VARS.allVisualAssets.splice(index, 1)[0];
+            VARS.allVisualAssets.push(tempCard)
+
             card.setClickability(false);
             let cardPosition = {y: (VARS.build.cardHeight * 2) + 60 + (i * 10), x: card.getPosition().x };
             card.setPosition(cardPosition);
@@ -24,12 +28,13 @@ const DrawPileAction =  {
 
         if (VARS.drawPile.length === 0) {
             VARS.flipPileReset = true;
+            VARS.resetDrawPileButton.clickable = true;
+            // VARS.deck.push(VARS.resetDrawPileButton)
         } else {
             //next flip card clickable
 
             let topFlipPileCard = VARS.drawPile[VARS.drawPile.length - 1]
             topFlipPileCard.setClickability(true);
-            console.log(topFlipPileCard);
 
             let topCard = VARS.drawPile[VARS.drawPile.length - 1];
             // topCard.setClickability(true);

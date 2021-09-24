@@ -1,8 +1,11 @@
-const Card =  function () {
-    return {
+class VisualAsset {
+
+    constructor () {
+
+    }
+    
+    setPosition()
         img: undefined,
-        cardFront: undefined,
-        cardBack: undefined,
         rank: undefined,
         suit: undefined,
         color: undefined,
@@ -46,4 +49,4 @@ const Card =  function () {
         }
     }
 }
-export default Card;
+export default VisualAsset;

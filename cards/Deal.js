@@ -1,4 +1,6 @@
 import Deck from './Deck.js';
+import Marker from '../visualAssets/Marker.js';
+import Slot from '../visualAssets/Slot.js';
 import VARS from '../utils/Vars.js';
 const Deal = {
     loopingQ: 7, 
@@ -31,29 +33,20 @@ const Deal = {
     },
     createCardPiles(xOffset) {
 
-      
+        const { deck, allVisualAssets } = VARS;
 
-        for (let i = 0; i < this.loopingQ; i++) {
-
-            let markerImage = new Image();
-            markerImage.src = '/bmps/marker.png';
-
-            let marker = {
-                img: markerImage,
-                marker: true,
-                index: i,
-                x: xOffset + (this.startX + (VARS.build.cardWidth + VARS.spacing.buffer) * i),
-                y: this.startY,
-
-            }
-            VARS.nonCardAssets.push(marker)
-            VARS.piles[i] = [marker]
+        for (let i = 0; i < this.loopingQ; i++) { 
+           let marker = Marker();
+            marker.build(xOffset + (this.startX + (VARS.build.cardWidth + VARS.spacing.buffer) * i),this.startY);
+            // console.log(marker);
+            VARS.allVisualAssets.unshift(marker);
+            VARS.piles[i] = [marker];
         }
 
         let card, verticalSpacer = 0;
 
-        const { deck } = VARS;
-        console.log(deck.length)
+        
+
         while (this.loopingQ > 0) {
             for (let j = 0; j < this.loopingQ; j++) {
 
@@ -100,7 +93,7 @@ const Deal = {
             resetDraw: true,
         }
         
-        VARS.nonCardAssets.push(VARS.resetDrawPileButton)
+        VARS.allVisualAssets.unshift(VARS.resetDrawPileButton)
     },
     createDrawPile(arr, init) {
 
@@ -128,20 +121,15 @@ const Deal = {
         let xOffset = (document.getElementById('tutorial').width - allFourSlotWidths) / 2;
         for (let i = 0; i < 4; i++) {
             let img = new Image();
-            img.src = `/bmps/slot${VARS.build.suits[i].charAt(0).toUpperCase()}${VARS.build.suits[i].substring(1, VARS.build.suits[i].length)}.png`; 
+            let imageString = `/bmps/slot${VARS.build.suits[i].charAt(0).toUpperCase()}${VARS.build.suits[i].substring(1, VARS.build.suits[i].length)}.png`; 
+            let xVal = xOffset + ((VARS.build.cardWidth + VARS.spacing.slot_spacer) * i);
+            let yVal = 0;
+            let slot = Slot();
 
-            let slot = {
-                img,
-                suit: VARS.build.suits[i],
-                rank: 1,
-                x: xOffset + ((VARS.build.cardWidth + VARS.spacing.slot_spacer) * i),
-                y:0
-            }
-
-            
-            width += VARS.build.cardWidth + VARS.spacing.slot_spacer ;
+            slot.build(xVal, yVal, imageString, VARS.build.suits[i])
+           
             VARS.slots.push(slot);
-            VARS.nonCardAssets.push(slot);
+            VARS.allVisualAssets.push(slot);
         }
         width = ( VARS.build.cardWidth + VARS.spacing.slot_spacer) * 3;
     }
