@@ -1,3 +1,5 @@
+import VARS from "../utils/Vars.js";
+
 const Card =  function () {
     return {
         img: undefined,
@@ -15,8 +17,12 @@ const Card =  function () {
         drawPile: false,
         flipPile: false,
         card: true,
+        width: undefined,
+        height: undefined,
+        index: undefined,
         build: function (rank, suit, value, x, y) {
-            this.rank = rank + 1;
+            let indexOfRank = VARS.build.ranks.indexOf(rank);
+            this.rank = indexOfRank + 1;
             this.suit = suit;
             this.img = new Image();
             this.cardFront = `bmps/card_bmps/${rank}_${suit}.png`;
@@ -25,7 +31,12 @@ const Card =  function () {
             this.value = value;
             this.x = x;
             this.y = y;
+            this.width = VARS.build.cardWidth;
+            this.height = VARS.build.cardHeight;
             this.reveal(true);
+        },
+        setIndex: function (index) {
+            this.index = index;
         },
         setPivot: function (pivotObject) {
             this.x -= pivotObject.x;

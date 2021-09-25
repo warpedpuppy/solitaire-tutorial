@@ -3,27 +3,23 @@ import VARS from './utils/Vars.js';
 import Deal from './cards/Deal.js';
 import DrawPileAction from './action/DrawPileAction.js';
 import Deck from './cards/Deck.js';
+import PileToPile from './action/PileToPile.js';
+import Utils from './utils/Utils.js';
 (function(){
-    var canvas = document.getElementById('tutorial');
-    var ctx = canvas.getContext('2d');
+
+    const { deck, canvas, allVisualAssets, build, flipPileReset, resetDrawPileButton } = VARS,
+          { cardWidth, cardHeight } = build,
+          { pointRectangleCollisionDetection } = Utils,
+          ctx = canvas.getContext('2d');
+
+    let mousePoint = {}, drag = false, xDiff, yDiff, activeCard, hit, over = [];
 
     Deck.build();
-    const { deck, cardsWithListeners } = VARS;
-    const { cardWidth, cardHeight } = VARS.build;
-
     Deal.start();
 
-
-
-    let mousePoint = {}, drag = false, xDiff, yDiff, activeCard, over = [], hit;
-    canvas.addEventListener('mousemove', e => {
-       mousePoint = {x: e.pageX, y: e.pageY}
-
-    })
+    canvas.addEventListener('mousemove', e => mousePoint = {x: e.pageX, y: e.pageY} )
 
     canvas.addEventListener('mousedown', e => {
-
-       
 
         // determine active card
         deck.forEach( (card, i) => {
@@ -33,19 +29,16 @@ import Deck from './cards/Deck.js';
                 let rect = {x, y, width: cardWidth, height: cardHeight};
                 hit = pointRectangleCollisionDetection(mousePoint, rect);
                 if (hit) {
-                    
                     drag = true;
                     activeCard = i;
                     card.storePosition();
                     xDiff = mousePoint.x - card.x;
                     yDiff = mousePoint.y - card.y;
-                    console.log(activeCard)
-                
                 } 
             }
-            
         })
-        //move to top
+        //move to top -- don't want to do this in the loop 
+        // also may be good moment to say 'beware of falsiness'
         if (activeCard !== undefined) {
             let card = deck.splice(activeCard, 1)[0];
             deck.push(card)
@@ -54,25 +47,34 @@ import Deck from './cards/Deck.js';
     })
 
     canvas.addEventListener('mouseup', e => {
+        const { flipPileReset, resetDrawPileButton, deck } = VARS;
+       
 
-        if (VARS.flipPileReset) {
-            let rect = {x: VARS.resetDrawPileButton.x, y: VARS.resetDrawPileButton.y, width: cardWidth, height: cardHeight};
+        if (activeCard !== undefined) {
+            if (deck[activeCard].drawPile) {
+                DrawPileAction.drawPileClickHandler();
+            } else {
+
+
+                let pileHitObject = PileToPile.movePileListener();
+                console.log(pileHitObject)
+                if (pileHitObject.hit) {
+                    // PileToPile.movePiles(pileHitObject.topCard, pileHitObject.key, this);
+                } else {
+                    deck[activeCard].resetPositionToStore();
+               
+                }
+            }
+        }
+
+        if (flipPileReset) {
+            let rect = {x: resetDrawPileButton.x, y: resetDrawPileButton.y, width: cardWidth, height: cardHeight};
             hit = pointRectangleCollisionDetection(mousePoint, rect);
             if (hit) {
                 DrawPileAction.resetDrawPileHandler();
-                VARS.resetDrawPileButton.clickable = false;
-                return;
-            } else {
-                VARS.deck[activeCard].resetPositionToStore();
-            }
-
-
-        } else if (activeCard && VARS.deck[activeCard].drawPile && !VARS.flipPile.includes(VARS.deck[activeCard])) {
-            DrawPileAction.drawPileClickHandler();
-        } else if (activeCard) {
-            VARS.deck[activeCard].resetPositionToStore();
-        }
-
+                resetDrawPileButton.clickable = false;
+            } 
+        } 
 
         drag = false;
         activeCard = undefined;
@@ -82,9 +84,9 @@ import Deck from './cards/Deck.js';
 
     function cursor(boolean) {
         if (boolean) {
-            document.getElementById("tutorial").style.cursor = "pointer";
+            canvas.style.cursor = "pointer";
         } else {
-            document.getElementById("tutorial").style.cursor = "default";
+            canvas.style.cursor = "default";
         }
         
     }
@@ -95,7 +97,7 @@ import Deck from './cards/Deck.js';
 
         over = [];
 
-        VARS.allVisualAssets.forEach( card => {
+        allVisualAssets.forEach( card => {
             const { img, x, y, clickable } = card;
            
     
@@ -123,11 +125,6 @@ import Deck from './cards/Deck.js';
     
      draw();
 
-    function pointRectangleCollisionDetection (point, rect) {
-        if (point.x > rect.x && point.x < rect.x + rect.width && point.y > rect.y && point.y < rect.y + rect.height) {
-          return true
-        }
-        return false
-    }
+    
 
 })()

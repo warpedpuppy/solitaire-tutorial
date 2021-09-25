@@ -17,6 +17,9 @@ const Deck = {
         })
 
     },
+    shuffle: function () {
+
+    },
     layOutInGrid () {
         let cardCounter = 0;
         for (let i = 0; i < 4; i ++) {

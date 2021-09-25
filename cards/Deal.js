@@ -59,11 +59,11 @@ const Deal = {
                 // }
                 // card.setPosition(cardPosition);
                 
-                // let index = (this.totalColumns - this.loopingQ) + j;//index is the key in the piles object
-                // card.setIndex(index);
-                // VARS.piles[index].push(card);
+                let index = (this.totalColumns - this.loopingQ) + j;//index is the key in the piles object
+                card.setIndex(index);
+                VARS.piles[index].push(card);
 
-                // card.setDrawPile(false);
+                card.setDrawPile(false);
                 
                 if (j === 0) {
                     card.reveal(true);

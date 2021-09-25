@@ -1,20 +1,15 @@
 const Utils = {
-    distributeAroundCircle (circleCenter, numElements, radius) {
-        const arr = []
-        for (let i = 0; i < numElements; i++) {
-          const x = circleCenter.x + radius * Math.cos((2 * Math.PI) * i / numElements)
-          const y = circleCenter.y + radius * Math.sin((2 * Math.PI) * i / numElements)
-          arr.push({ x, y })
-        }
-        return arr
-      },
-      returnPointsAroundACircle (radius, i, numElements) {
-        const x = radius * Math.cos((2 * Math.PI) * i / numElements)
-        const y = radius * Math.sin((2 * Math.PI) * i / numElements)
-        return { x, y }
-      },
-      deg2rad (degree) {
-        return degree * (Math.PI / 180)
-      }
+  rectangleRectangleCollisionDetection: function (rect1, rect2) {
+    return (rect1.x <= (rect2.x + rect2.width) &&
+            rect2.x <= (rect1.x + rect1.width) &&
+            rect1.y <= (rect2.y + rect2.height) &&
+            rect2.y <= (rect1.y + rect1.height))
+  },
+  pointRectangleCollisionDetection: function (point, rect) {
+    if (point.x > rect.x && point.x < rect.x + rect.width && point.y > rect.y && point.y < rect.y + rect.height) {
+      return true
+    }
+    return false
+}
 }
 export default Utils;

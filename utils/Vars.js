@@ -9,6 +9,7 @@ const VARS = {
     slots: [],
     resetDrawPileButton: undefined,
     flipPileReset: false,
+    canvas: document.querySelector('canvas'),
     spacing: {
         buffer: 10,
         buffer_larger: 40,
