@@ -22,7 +22,11 @@ import Utils from './utils/Utils.js';
     canvas.addEventListener('mousedown', e => {
 
         // determine active card
-        deck.forEach( (card, i) => {
+        
+        allVisualAssets.forEach( (card, i) => {
+
+            if (!VARS.deck.includes(card)) return;
+
             const { x, y, clickable } = card;
             
             if ( clickable ) {
@@ -31,38 +35,63 @@ import Utils from './utils/Utils.js';
                 if (hit) {
                     drag = true;
                     activeCard = i;
+
                     card.storePosition();
                     xDiff = mousePoint.x - card.x;
                     yDiff = mousePoint.y - card.y;
+
+                    VARS.dragContainer = [];
+
+                    if (card._index !== undefined) {
+                        let pile = VARS.piles[card._index];
+                        let indexInPile = pile.indexOf(card);
+
+                        for (let i = indexInPile; i < pile.length; i++) {
+                            VARS.dragContainer.push(pile[i]);       
+                        }
+
+                    } else {
+                        VARS.dragContainer.push(VARS.allVisualAssets[activeCard])
+                    }
                 } 
             }
         })
+
         //move to top -- don't want to do this in the loop 
-        // also may be good moment to say 'beware of falsiness'
-        if (activeCard !== undefined) {
-            let activeCardIndex = VARS.allVisualAssets.indexOf(VARS.deck[activeCard]);
-            let card = VARS.allVisualAssets.splice(activeCardIndex, 1)[0];
-            VARS.allVisualAssets.push(card)
-            // activeCard = VARS.allVisualAssets.length - 1;
+        if (VARS.dragContainer.length) {
+
+            VARS.dragContainer.forEach((card, i) => {
+
+                card.drag(true);
+                card.storePosition();
+                let moveIndex = VARS.allVisualAssets.indexOf(card);
+                let cardToShiftUp = VARS.allVisualAssets.splice(moveIndex, 1)[0];
+                VARS.allVisualAssets.push(cardToShiftUp);
+                cardToShiftUp.yOffset = i * VARS.spacing.buffer_larger;
+                i++;
+            })
+            activeCard = VARS.allVisualAssets.length - VARS.dragContainer.length;
         }
     })
 
     canvas.addEventListener('mouseup', e => {
-        const { flipPileReset, resetDrawPileButton, deck } = VARS;
+        const { flipPileReset, resetDrawPileButton, allVisualAssets } = VARS;
        
 
         if (activeCard !== undefined) {
-            if (deck[activeCard].drawPile) {
+
+            if (allVisualAssets[activeCard].drawPile) {
                 DrawPileAction.drawPileClickHandler();
             } else {
 
-
                 let pileHitObject = PileToPile.movePileListener(activeCard);
-                console.log(pileHitObject)
                 if (pileHitObject.hit) {
                     PileToPile.movePiles(pileHitObject.topCard, pileHitObject.key, activeCard);
                 } else {
-                    deck[activeCard].resetPositionToStore();
+                    VARS.dragContainer.forEach( card => {
+                        card.resetPositionToStore()
+                    })
+                    // deck[activeCard].resetPositionToStore();
                
                 }
             }
@@ -81,6 +110,9 @@ import Utils from './utils/Utils.js';
         activeCard = undefined;
         xDiff = undefined;
         yDiff = undefined;
+        VARS.dragContainer.forEach (card => {
+            card.yOffset = 0;
+        });
     })
 
     function cursor(boolean) {
@@ -99,7 +131,7 @@ import Utils from './utils/Utils.js';
         over = [];
 
         allVisualAssets.forEach( card => {
-            const { img, x, y, clickable } = card;
+            const { img, x, y, clickable, beingDragged } = card;
            
     
             ctx.drawImage(img, x, y);
@@ -109,14 +141,22 @@ import Utils from './utils/Utils.js';
                 let hit = pointRectangleCollisionDetection(mousePoint, rect);
                 over.push(hit);
             }
+
+            // if (VARS.dragContainer.includes(card)) {
+            //     card.x = mousePoint.x - xDiff;
+            //     card.y = mousePoint.y - yDiff;
+            // }
             
         })
 
         cursor(over.includes(true));
-
-        if (drag && !deck[activeCard].drawPile) {
-            deck[activeCard].x = mousePoint.x - xDiff;
-            deck[activeCard].y = mousePoint.y - yDiff;
+        if (drag && !allVisualAssets[activeCard].drawPile) {
+            // deck[activeCard].x = mousePoint.x - xDiff;
+            // deck[activeCard].y = mousePoint.y - yDiff;
+            VARS.dragContainer.forEach( (card, i) => {
+                card.x = mousePoint.x - xDiff;
+                card.y = (mousePoint.y - yDiff) + card.yOffset;
+            })
         } 
 
         

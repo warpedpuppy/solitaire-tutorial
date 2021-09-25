@@ -7,6 +7,7 @@ const VARS = {
     flipPile: [],
     piles: {},
     slots: [],
+    dragContainer: [],
     resetDrawPileButton: undefined,
     flipPileReset: false,
     canvas: document.querySelector('canvas'),

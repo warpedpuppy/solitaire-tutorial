@@ -4,7 +4,7 @@ import Utils from '../utils/Utils.js';
 const PileToPile = {
     movePileListener: function (activeCard) {
 
-        let activeCardObj = VARS.deck[activeCard];
+        let activeCardObj = VARS.allVisualAssets[activeCard];
 
 
         for (let key in VARS.piles) {
@@ -14,10 +14,9 @@ const PileToPile = {
             if (!activeCardObj || !topCard || activeCardObj._index === +key) continue;
 
 
-    
+            
 
             let { color, rank } = activeCardObj;
-
             let alternatingSuitAndOneLower = (topCard.color !== color && topCard.rank === (rank + 1));
             if (
                 (alternatingSuitAndOneLower || topCard.marker) &&
@@ -35,22 +34,32 @@ const PileToPile = {
 
             let buffer = topCard.marker ? 0 : VARS.spacing.buffer_larger ;
         
-            VARS.deck[activeCard].setPosition({x, y: y + buffer})
             
-            let { _index, flipPile } =  VARS.deck[activeCard];
+            
+            let { _index, flipPile } =  VARS.allVisualAssets[activeCard];
 
             if (!flipPile) {
-                VARS.piles[_index].splice(VARS.piles[_index].indexOf(VARS.deck[activeCard]), 1)
+
+                
+                VARS.dragContainer.forEach( (card, i) => {
+                    card.setPosition({x, y: y + (buffer * (i+1) )});
+                    let formerPile = VARS.piles[_index];
+                    let indexOfCardInFormerPile = formerPile.indexOf(card);
+                    formerPile.splice(indexOfCardInFormerPile, 1);
+                    VARS.piles[key].push(card);
+                    card.setIndex(+key);
+                })
                 VARS.revealNextCard(VARS.piles[_index])
             } else {
-                VARS.deck[activeCard].setFlipPile(false);
-                VARS.flipPile.splice(VARS.flipPile.indexOf(VARS.deck[activeCard]), 1);
-                // VARS.revealNextCard(VARS.flipPile)
+                VARS.allVisualAssets[activeCard].setPosition({x, y: y + buffer})
+                VARS.allVisualAssets[activeCard].setFlipPile(false);
+                VARS.flipPile.splice(VARS.flipPile.indexOf(VARS.allVisualAssets[activeCard]), 1);
+                VARS.revealNextCard(VARS.flipPile)
+                VARS.piles[key].push(VARS.allVisualAssets[activeCard]);
+                VARS.allVisualAssets[activeCard].setIndex(+key);
             }
 
-            VARS.piles[key].push(VARS.deck[activeCard]);
-            VARS.deck[activeCard].setIndex(+key); 
-            // Testing.sumOfListeners(VARS.deck)
+
 
     }
 }

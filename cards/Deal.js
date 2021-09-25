@@ -56,10 +56,10 @@ const Deal = {
                 let x = xOffset + (this.startX + (VARS.build.cardWidth + VARS.spacing.buffer) * j);
                 let y = this.startY + (VARS.spacing.buffer * verticalSpacer);
                 card.setPosition({x, y})
-                // }
-                // card.setPosition(cardPosition);
+               
                 
-                let index = (this.totalColumns - this.loopingQ) + j;//index is the key in the piles object
+                let index = (this.totalColumns - this.loopingQ) + j;
+ 
                 card.setIndex(index);
                 VARS.piles[index].push(card);
 
