@@ -1,3 +1,4 @@
+import VARS from "../utils/Vars.js";
 const Marker =  function () {
     return {
         img: undefined,
@@ -8,11 +9,15 @@ const Marker =  function () {
         drawPile: false,
         card: false,
         marker: true,
+        height: undefined,
+        width: undefined,
         build: function (x, y) {
             this.img = new Image();
             this.img.src = this.src;
             this.x = x;
             this.y = y;
+            this.height = VARS.build.cardHeight;
+            this.width = VARS.build.cardWidth;
         },
         getPosition: function() {
             return { x: this.x, y: this.y }

@@ -66,6 +66,7 @@ const Deal = {
                 card.setDrawPile(false);
                 
                 if (j === 0) {
+                    card.setClickability(true)
                     card.reveal(true);
                 } else {
                     card.reveal(false);

@@ -17,9 +17,8 @@ const PileToPile = {
     
 
             let { color, rank } = activeCardObj;
-            
-            let alternatingSuitAndOneLower = (topCard.color !== color && topCard.rank === (rank + 1));
 
+            let alternatingSuitAndOneLower = (topCard.color !== color && topCard.rank === (rank + 1));
             if (
                 (alternatingSuitAndOneLower || topCard.marker) &&
                 Utils.rectangleRectangleCollisionDetection(topCard, activeCardObj)
@@ -33,14 +32,16 @@ const PileToPile = {
     movePiles: function (topCard, key, activeCard) {
        
             let { x, y } = topCard.getPosition();
+
+            let buffer = topCard.marker ? 0 : VARS.spacing.buffer_larger ;
         
-            VARS.deck[activeCard].setPosition({x, y: y + VARS.spacing.buffer_larger})
+            VARS.deck[activeCard].setPosition({x, y: y + buffer})
             
             let { _index, flipPile } =  VARS.deck[activeCard];
 
             if (!flipPile) {
                 VARS.piles[_index].splice(VARS.piles[_index].indexOf(VARS.deck[activeCard]), 1)
-                VARS.revealNextCard(VARS.piles[index])
+                VARS.revealNextCard(VARS.piles[_index])
             } else {
                 VARS.deck[activeCard].setFlipPile(false);
                 VARS.flipPile.splice(VARS.flipPile.indexOf(VARS.deck[activeCard]), 1);

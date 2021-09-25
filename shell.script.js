@@ -40,9 +40,10 @@ import Utils from './utils/Utils.js';
         //move to top -- don't want to do this in the loop 
         // also may be good moment to say 'beware of falsiness'
         if (activeCard !== undefined) {
-            let card = deck.splice(activeCard, 1)[0];
-            deck.push(card)
-            activeCard = deck.length - 1;
+            let activeCardIndex = VARS.allVisualAssets.indexOf(VARS.deck[activeCard]);
+            let card = VARS.allVisualAssets.splice(activeCardIndex, 1)[0];
+            VARS.allVisualAssets.push(card)
+            // activeCard = VARS.allVisualAssets.length - 1;
         }
     })
 
@@ -57,6 +58,7 @@ import Utils from './utils/Utils.js';
 
 
                 let pileHitObject = PileToPile.movePileListener(activeCard);
+                console.log(pileHitObject)
                 if (pileHitObject.hit) {
                     PileToPile.movePiles(pileHitObject.topCard, pileHitObject.key, activeCard);
                 } else {
