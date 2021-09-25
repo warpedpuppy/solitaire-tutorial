@@ -6,28 +6,23 @@ const PileToPile = {
 
         let activeCardObj = VARS.deck[activeCard];
 
-        //  COLLISION DETECTION TESTING
-        //  Testing.collisionDetectionTest(activeCardObj, false)
-        console.log(VARS.piles)
+
         for (let key in VARS.piles) {
 
             let arr = VARS.piles[key], topCard = arr[arr.length - 1];
-            
-            if (!VARS.activeCard || !topCard || VARS.activeCard._index === +key) continue;
 
-            let topCardObj = topCard;
-            
-            // COLLISION DETECTION TESTING
-            // Testing.collisionDetectionTest(topCardObj, false)
+            if (!activeCardObj || !topCard || activeCardObj._index === +key) continue;
+
+
+    
 
             let { color, rank } = activeCardObj;
-            console.log(topCard)
-
+            
             let alternatingSuitAndOneLower = (topCard.color !== color && topCard.rank === (rank + 1));
 
             if (
                 (alternatingSuitAndOneLower || topCard.marker) &&
-                Utils.rectangleRectangleCollisionDetection(topCardObj, activeCardObj)
+                Utils.rectangleRectangleCollisionDetection(topCard, activeCardObj)
             ) {
                 return { hit: true, topCard, key }
             }
@@ -35,25 +30,25 @@ const PileToPile = {
         }
         return { hit: false }
     },
-    movePiles: function (topCard, key) {
+    movePiles: function (topCard, key, activeCard) {
        
             let { x, y } = topCard.getPosition();
-            VARS.activeCard.x = x;
-            VARS.activeCard.y = y + VARS.spacing.buffer_larger;
+        
+            VARS.deck[activeCard].setPosition({x, y: y + VARS.spacing.buffer_larger})
             
-            let { index, drawPile, classRef } = VARS.activeCard.classRef.getData();
+            let { _index, flipPile } =  VARS.deck[activeCard];
 
-            if (!drawPile) {
-                VARS.piles[index].splice(VARS.piles[index].indexOf(classRef), 1)
+            if (!flipPile) {
+                VARS.piles[_index].splice(VARS.piles[_index].indexOf(VARS.deck[activeCard]), 1)
                 VARS.revealNextCard(VARS.piles[index])
             } else {
-                classRef.setDrawPile(false);
-                VARS.flipPile.splice(VARS.flipPile.indexOf(classRef), 1);
-                VARS.revealNextCard(VARS.flipPile)
+                VARS.deck[activeCard].setFlipPile(false);
+                VARS.flipPile.splice(VARS.flipPile.indexOf(VARS.deck[activeCard]), 1);
+                // VARS.revealNextCard(VARS.flipPile)
             }
 
-            VARS.piles[key].push(classRef);
-            classRef.setIndex(+key); 
+            VARS.piles[key].push(VARS.deck[activeCard]);
+            VARS.deck[activeCard].setIndex(+key); 
             // Testing.sumOfListeners(VARS.deck)
 
     }

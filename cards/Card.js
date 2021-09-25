@@ -19,7 +19,7 @@ const Card =  function () {
         card: true,
         width: undefined,
         height: undefined,
-        index: undefined,
+        _index: undefined,
         build: function (rank, suit, value, x, y) {
             let indexOfRank = VARS.build.ranks.indexOf(rank);
             this.rank = indexOfRank + 1;
@@ -36,7 +36,7 @@ const Card =  function () {
             this.reveal(true);
         },
         setIndex: function (index) {
-            this.index = index;
+            this._index = index;
         },
         setPivot: function (pivotObject) {
             this.x -= pivotObject.x;

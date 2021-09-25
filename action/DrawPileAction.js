@@ -21,7 +21,8 @@ const DrawPileAction =  {
             VARS.allVisualAssets.push(tempCard)
 
             card.setClickability(false);
-            card.setDrawPile(false)
+            card.setDrawPile(false);
+            card.setFlipPile(true);
             let cardPosition = {y: (VARS.build.cardHeight * 2) + 60 + (i * 10), x: card.getPosition().x };
             card.setPosition(cardPosition);
             card.reveal(true);

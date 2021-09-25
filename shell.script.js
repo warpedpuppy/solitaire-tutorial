@@ -56,10 +56,9 @@ import Utils from './utils/Utils.js';
             } else {
 
 
-                let pileHitObject = PileToPile.movePileListener();
-                console.log(pileHitObject)
+                let pileHitObject = PileToPile.movePileListener(activeCard);
                 if (pileHitObject.hit) {
-                    // PileToPile.movePiles(pileHitObject.topCard, pileHitObject.key, this);
+                    PileToPile.movePiles(pileHitObject.topCard, pileHitObject.key, activeCard);
                 } else {
                     deck[activeCard].resetPositionToStore();
                
