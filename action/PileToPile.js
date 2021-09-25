@@ -1,6 +1,6 @@
 import VARS from '../utils/Vars.js';
 import Utils from '../utils/Utils.js';
-// import Testing from '../utils/Testing.js';
+
 const PileToPile = {
     movePileListener: function (activeCard) {
 
@@ -12,9 +12,6 @@ const PileToPile = {
             let arr = VARS.piles[key], topCard = arr[arr.length - 1];
 
             if (!activeCardObj || !topCard || activeCardObj._index === +key) continue;
-
-
-            
 
             let { color, rank } = activeCardObj;
             let alternatingSuitAndOneLower = (topCard.color !== color && topCard.rank === (rank + 1));
@@ -31,16 +28,10 @@ const PileToPile = {
     movePiles: function (topCard, key, activeCard) {
        
             let { x, y } = topCard.getPosition();
-
             let buffer = topCard.marker ? 0 : VARS.spacing.buffer_larger ;
-        
-            
-            
             let { _index, flipPile } =  VARS.allVisualAssets[activeCard];
 
             if (!flipPile) {
-
-                
                 VARS.dragContainer.forEach( (card, i) => {
                     card.setPosition({x, y: y + (buffer * (i+1) )});
                     let formerPile = VARS.piles[_index];
@@ -58,9 +49,6 @@ const PileToPile = {
                 VARS.piles[key].push(VARS.allVisualAssets[activeCard]);
                 VARS.allVisualAssets[activeCard].setIndex(+key);
             }
-
-
-
     }
 }
 export default PileToPile;
