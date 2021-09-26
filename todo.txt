@@ -1,0 +1,2 @@
+1) unify pile to slot and pile to pile
+2) change active card to object

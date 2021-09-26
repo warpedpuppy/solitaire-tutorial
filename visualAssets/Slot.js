@@ -1,3 +1,4 @@
+import VARS from "../utils/Vars.js";
 const Slot =  function () {
     return {
         img: undefined,
@@ -10,12 +11,16 @@ const Slot =  function () {
         slot: true,
         rank: 1,
         suit: undefined,
+        width: undefined,
+        height: undefined,
         build: function (x, y, imgString, suit) {
             this.img = new Image();
             this.img.src = imgString;
             this.x = x;
             this.y = y;
             this.suit = suit;
+            this.height = VARS.build.cardHeight;
+            this.width = VARS.build.cardWidth;
         },
         getPosition: function() {
             return { x: this.x, y: this.y }
