@@ -2,7 +2,7 @@ import Card from './Card.js';
 import VARS from '../utils/Vars.js';
 const Deck = {
     build: function () {
-        const { deck, allVisualAssets } = VARS;
+        let { deck, allVisualAssets } = VARS;
         const { suits, ranks } = VARS.build;
         let value = 1;
         let temp = []
@@ -11,14 +11,21 @@ const Deck = {
                 let card = Card();
                 card.build(rank, suit, value, j * 50, i * 100);
                 allVisualAssets.push(card);
-                deck.push(card)
+                // deck.push(card)
                 value ++;
             })
         })
-
+        VARS.allVisualAssets = this.shuffle(VARS.allVisualAssets)
     },
-    shuffle: function () {
-
+    shuffle: function(arr) {
+        let currentIndex = arr.length,  randomIndex;
+        while (currentIndex != 0) {
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex--;
+          // ec6 destructuring allows us define two variables at once!
+          [arr[currentIndex], arr[randomIndex]] = [arr[randomIndex], arr[currentIndex]];
+        }
+        return arr;
     },
     layOutInGrid () {
         let cardCounter = 0;

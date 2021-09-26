@@ -4,16 +4,14 @@ import Utils from '../utils/Utils.js';
 const PileToSlot = {
     slotHitListener: function (actvieCard) {
 
-        let activeCardObj = VARS.allVisualAssets[actvieCard];
-
-        let { suit, rank } = activeCardObj;
+        let { suit, rank } = actvieCard;
 
         for (let i = 0; i < 4; i ++) {
             let slotObj = VARS.slots[i]; 
 
             if ( 
                  // COLLISION DETECTION TESTING
-                Utils.rectangleRectangleCollisionDetection(slotObj, activeCardObj) &&
+                Utils.rectangleRectangleCollisionDetection(slotObj, actvieCard) &&
                 slotObj.rank === rank &&
                 slotObj.suit === suit
             ) {
@@ -24,17 +22,13 @@ const PileToSlot = {
     },
     addCardToSlot: function (actvieCard, slot) {
 
-
-        let activeCardObj = VARS.allVisualAssets[actvieCard]
-
-        let { drawPile, _index, setPosition } = activeCardObj;
-        console.log(slot)
-        activeCardObj.setClickability(false);
-        activeCardObj.setPosition({x: slot.x, y: slot.y})
+        let { drawPile, _index } = actvieCard;
+        actvieCard.setClickability(false);
+        actvieCard.setPosition({x: slot.x, y: slot.y})
 
         let tempArray = (!drawPile) ? VARS.piles[_index] : VARS.flipPile;
-        tempArray.splice(tempArray.indexOf(activeCardObj), 1);
-        activeCardObj.setDrawPile(false);
+        tempArray.splice(tempArray.indexOf(actvieCard), 1);
+        actvieCard.setDrawPile(false);
         slot.rank ++;
         VARS.revealNextCard(tempArray);
     }

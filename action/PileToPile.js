@@ -4,20 +4,17 @@ import Utils from '../utils/Utils.js';
 const PileToPile = {
     movePileListener: function (activeCard) {
 
-        let activeCardObj = VARS.allVisualAssets[activeCard];
-
-
         for (let key in VARS.piles) {
 
             let arr = VARS.piles[key], topCard = arr[arr.length - 1];
 
-            if (!activeCardObj || !topCard || activeCardObj._index === +key) continue;
+            if (!activeCard || !topCard || activeCard._index === +key) continue;
 
-            let { color, rank } = activeCardObj;
+            let { color, rank } = activeCard;
             let alternatingSuitAndOneLower = (topCard.color !== color && topCard.rank === (rank + 1));
             if (
                 (alternatingSuitAndOneLower || topCard.marker) &&
-                Utils.rectangleRectangleCollisionDetection(topCard, activeCardObj)
+                Utils.rectangleRectangleCollisionDetection(topCard, activeCard)
             ) {
                 return { hit: true, topCard, key }
             }
@@ -29,7 +26,7 @@ const PileToPile = {
        
             let { x, y } = topCard.getPosition();
             let buffer = topCard.marker ? 0 : VARS.spacing.buffer_larger ;
-            let { _index, flipPile } =  VARS.allVisualAssets[activeCard];
+            let { _index, flipPile } =  activeCard;
 
             if (!flipPile) {
                 VARS.dragContainer.forEach( (card, i) => {
@@ -42,12 +39,12 @@ const PileToPile = {
                 })
                 VARS.revealNextCard(VARS.piles[_index])
             } else {
-                VARS.allVisualAssets[activeCard].setPosition({x, y: y + buffer})
-                VARS.allVisualAssets[activeCard].setFlipPile(false);
-                VARS.flipPile.splice(VARS.flipPile.indexOf(VARS.allVisualAssets[activeCard]), 1);
+                activeCard.setPosition({x, y: y + buffer})
+                activeCard.setFlipPile(false);
+                VARS.flipPile.splice(VARS.flipPile.indexOf(activeCard), 1);
                 VARS.revealNextCard(VARS.flipPile)
-                VARS.piles[key].push(VARS.allVisualAssets[activeCard]);
-                VARS.allVisualAssets[activeCard].setIndex(+key);
+                VARS.piles[key].push(activeCard);
+                activeCard.setIndex(+key);
             }
     }
 }

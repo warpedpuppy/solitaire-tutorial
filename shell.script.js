@@ -8,7 +8,7 @@ import PileToSlot from './action/PileToSlot.js';
 import Utils from './utils/Utils.js';
 (function(){
 
-    const { deck, canvas, allVisualAssets, build, flipPileReset, resetDrawPileButton } = VARS,
+    const { canvas, allVisualAssets, build } = VARS,
           { cardWidth, cardHeight } = build,
           { pointRectangleCollisionDetection } = Utils,
           ctx = canvas.getContext('2d');
@@ -35,7 +35,7 @@ import Utils from './utils/Utils.js';
                 hit = pointRectangleCollisionDetection(mousePoint, rect);
                 if (hit) {
                     drag = true;
-                    activeCard = i;
+                    activeCard = card;
 
                     card.storePosition();
                     xDiff = mousePoint.x - card.x;
@@ -52,7 +52,7 @@ import Utils from './utils/Utils.js';
                         }
 
                     } else {
-                        VARS.dragContainer.push(VARS.allVisualAssets[activeCard])
+                        VARS.dragContainer.push(activeCard)
                     }
                 } 
             }
@@ -71,7 +71,7 @@ import Utils from './utils/Utils.js';
                 cardToShiftUp.yOffset = i * VARS.spacing.buffer_larger;
                 i++;
             })
-            activeCard = VARS.allVisualAssets.length - VARS.dragContainer.length;
+            // activeCard = VARS.allVisualAssets.length - VARS.dragContainer.length;
         }
     })
 
@@ -81,7 +81,7 @@ import Utils from './utils/Utils.js';
 
         if (activeCard !== undefined) {
 
-            if (allVisualAssets[activeCard].drawPile) {
+            if (activeCard.drawPile) {
                 DrawPileAction.drawPileClickHandler();
             } else {
 

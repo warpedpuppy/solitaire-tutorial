@@ -10,11 +10,10 @@ const Deal = {
     totalColumns: 7,
     xOffset: 0,
     start: function () {
+        VARS.deck = [...VARS.allVisualAssets]
 
         this.startX = VARS.build.cardWidth + VARS.spacing.buffer_larger;
         this.startY = VARS.build.cardHeight + VARS.spacing.buffer_larger;
-
-        // Deck.shuffle();
 
         let gameBoardWidth = (VARS.build.cardWidth * 8)  + (VARS.spacing.buffer * 6 ) + VARS.spacing.buffer_larger;
         this.xOffset = (document.getElementById('tutorial').width - gameBoardWidth) / 2;
@@ -29,11 +28,12 @@ const Deal = {
 
         // // SLOTS 
         this.createSlots();
+        
       
     },
     createCardPiles(xOffset) {
 
-        const { deck, allVisualAssets } = VARS;
+        const { deck } = VARS;
 
         for (let i = 0; i < this.loopingQ; i++) { 
            let marker = Marker();
@@ -121,7 +121,6 @@ const Deal = {
         let allFourSlotWidths = (VARS.build.cardWidth + VARS.spacing.slot_spacer) * 4;
         let xOffset = (document.getElementById('tutorial').width - allFourSlotWidths) / 2;
         for (let i = 0; i < 4; i++) {
-            let img = new Image();
             let imageString = `/bmps/slot${VARS.build.suits[i].charAt(0).toUpperCase()}${VARS.build.suits[i].substring(1, VARS.build.suits[i].length)}.png`; 
             let xVal = xOffset + ((VARS.build.cardWidth + VARS.spacing.slot_spacer) * i);
             let yVal = 0;
