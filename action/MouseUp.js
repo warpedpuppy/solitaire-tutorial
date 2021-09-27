@@ -1,6 +1,5 @@
 
-import PileToPile from '../action/PileToPile.js';
-import PileToSlot from '../action/PileToSlot.js';
+import MoveCard from '../action/MoveCard.js';
 import VARS from '../utils/Vars.js';
 import DrawPileAction from '../action/DrawPileAction.js';
 import Utils from '../utils/Utils.js';
@@ -11,13 +10,12 @@ const MouseUp = {
         if (activeCard.drawPile) {
             DrawPileAction.drawPileClickHandler();
         } else {
+            let result = MoveCard.moveCardListener(activeCard)
 
-            let slotHitObject = PileToSlot.slotHitListener(activeCard);
-            let pileHitObject = PileToPile.movePileListener(activeCard);
-            if (VARS.dragContainer.length === 1 && slotHitObject.hit) {
-                PileToSlot.addCardToSlot(activeCard, slotHitObject.slot)
-            } else if (pileHitObject.hit) {
-                PileToPile.movePiles(pileHitObject.topCard, pileHitObject.key, activeCard);
+            if (result.hit && result.slot) {
+                MoveCard.addCardToSlot(activeCard, result.slot)
+            } else if (result.hit && result.key !== undefined) {
+                MoveCard.movePiles(result.topCard, result.key, activeCard);
             } else {
                 VARS.dragContainer.forEach( card => {
                     card.resetPositionToStore()

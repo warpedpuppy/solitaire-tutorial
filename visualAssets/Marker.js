@@ -11,13 +11,14 @@ const Marker =  function () {
         marker: true,
         height: undefined,
         width: undefined,
-        build: function (x, y) {
+        build: function (x, y, index) {
             this.img = new Image();
             this.img.src = this.src;
             this.x = x;
             this.y = y;
             this.height = VARS.build.cardHeight;
             this.width = VARS.build.cardWidth;
+            this._index = index;
         },
         getPosition: function() {
             return { x: this.x, y: this.y }

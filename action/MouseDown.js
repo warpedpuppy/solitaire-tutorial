@@ -5,9 +5,9 @@ const MouseDown = {
         const { build } = VARS,
             { cardWidth, cardHeight } = build;
         let { mousePoint } = VARS;
-        VARS.deck.forEach( (card, i) => {
+        VARS.allVisualAssets.forEach( (card, i) => {
             
-           const { x, y, clickable } = card;
+           const { x, y, clickable, drawPile } = card;
            
            if ( clickable ) {
                let rect = {x, y, width: cardWidth, height: cardHeight};
@@ -29,7 +29,7 @@ const MouseDown = {
                            VARS.dragContainer.push(pile[i]);       
                        }
 
-                   } else {
+                   } else if (!drawPile) {
                        VARS.dragContainer.push(VARS.activeCard)
                    }
                } 

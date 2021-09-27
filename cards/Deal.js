@@ -39,7 +39,7 @@ const Deal = {
 
         for (let i = 0; i < this.loopingQ; i++) { 
            let marker = Marker();
-            marker.build(xOffset + (this.startX + (VARS.build.cardWidth + VARS.spacing.buffer) * i),this.startY);
+            marker.build(xOffset + (this.startX + (VARS.build.cardWidth + VARS.spacing.buffer) * i),this.startY, i);
             // console.log(marker);
             VARS.allVisualAssets.unshift(marker);
             VARS.piles[i] = [marker];
