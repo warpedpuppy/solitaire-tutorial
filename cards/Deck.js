@@ -2,7 +2,7 @@ import Card from './Card.js';
 import VARS from '../utils/Vars.js';
 const Deck = {
     build: function () {
-        let { deck, allVisualAssets } = VARS;
+        let { allVisualAssets } = VARS;
         const { suits, ranks } = VARS.build;
         let value = 1;
         let temp = []
@@ -11,7 +11,6 @@ const Deck = {
                 let card = Card();
                 card.build(rank, suit, value, j * 50, i * 100);
                 allVisualAssets.push(card);
-                // deck.push(card)
                 value ++;
             })
         })
