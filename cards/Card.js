@@ -20,7 +20,6 @@ const Card =  function () {
         width: undefined,
         height: undefined,
         _index: undefined,
-        beingDragged: false,
         activeCard: false,
         dragYOffset: 0,
         build: function (rank, suit, value, x, y) {
@@ -37,9 +36,6 @@ const Card =  function () {
             this.width = VARS.build.cardWidth;
             this.height = VARS.build.cardHeight;
             this.reveal(true);
-        },
-        drag: function (boolean) {
-            this.beingDragged = boolean;
         },
         setIndex: function (index) {
             this._index = index;

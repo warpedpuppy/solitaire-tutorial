@@ -1,23 +1,18 @@
 import Deal from '../cards/Deal.js';
 import VARS from '../utils/Vars.js';
-
+import Utils from '../utils/Utils.js'
 const DrawPileAction =  {
     drawPileClickHandler: function () {
 
         this.clearFlipPileClickabilities();
 
-        // Testing.printCards(VARS.drawPile)
+
         let top3 = VARS.drawPile.splice(-3).reverse(), card;
-        // Testing.printCards(top3)
 
         for (let i = 0; i < top3.length; i++) {
             card = top3[i];
 
-            //make sure visually on the top
-            let index = VARS.allVisualAssets.indexOf(card);
-            let tempCard = VARS.allVisualAssets.splice(index, 1)[0];
-            VARS.allVisualAssets.push(tempCard)
-
+            Utils.moveToTopOfVisualAssets(card, VARS.allVisualAssets);
             card.setClickability(false);
             card.setDrawPile(false);
             card.setFlipPile(true);
@@ -27,7 +22,6 @@ const DrawPileAction =  {
         }
 
         VARS.flipPile = [...VARS.flipPile, ...top3];
-        // VARS.topFlipPileCard = card;
 
         if (VARS.drawPile.length === 0) {
             VARS.flipPileReset = true;
@@ -47,7 +41,6 @@ const DrawPileAction =  {
         })
     },
     resetDrawPileHandler: function () {
-        // ListenerManager.removeResetFlip(VARS.resetDrawPileButton);
         VARS.drawPile = [...VARS.flipPile].reverse();
         Deal.createDrawPile(VARS.drawPile, false);
         VARS.flipPile = [];

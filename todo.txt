@@ -12,3 +12,7 @@ presentation notes:
 2) array shuffle illustration
 
 3) illustrate that even though imported into several pages -- same object
+
+4) take them through definitions (flipPile, drawPile, etc.)
+
+5) illustrate point rectangle hit collision /  rectangle rectangle hit collision

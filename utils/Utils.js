@@ -6,10 +6,16 @@ const Utils = {
             rect2.y <= (rect1.y + rect1.height))
   },
   pointRectangleCollisionDetection: function (point, rect) {
-    if (point.x > rect.x && point.x < rect.x + rect.width && point.y > rect.y && point.y < rect.y + rect.height) {
-      return true
-    }
-    return false
-}
+      if (point.x > rect.x && point.x < rect.x + rect.width && point.y > rect.y && point.y < rect.y + rect.height) {
+        return true
+      }
+      return false
+  },
+  moveToTopOfVisualAssets: function(card, array) {
+    let moveIndex = array.indexOf(card);
+    let cardToShiftUp = array.splice(moveIndex, 1)[0];
+    array.push(cardToShiftUp);
+    return cardToShiftUp
+  }
 }
 export default Utils;
