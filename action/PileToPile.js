@@ -25,12 +25,12 @@ const PileToPile = {
     movePiles: function (topCard, key, activeCard) {
        
             let { x, y } = topCard.getPosition();
-            let buffer = topCard.marker ? 0 : VARS.spacing.buffer_larger ;
+            let markerAdjust = topCard.marker ? 0 : 1 ;
             let { _index, flipPile } =  activeCard;
 
             if (!flipPile) {
                 VARS.dragContainer.forEach( (card, i) => {
-                    card.setPosition({x, y: y + (buffer * (i+1) )});
+                    card.setPosition({x, y: y + (VARS.spacing.buffer_larger * ( i + markerAdjust) )});
                     let formerPile = VARS.piles[_index];
                     let indexOfCardInFormerPile = formerPile.indexOf(card);
                     formerPile.splice(indexOfCardInFormerPile, 1);
@@ -39,7 +39,7 @@ const PileToPile = {
                 })
                 VARS.revealNextCard(VARS.piles[_index])
             } else {
-                activeCard.setPosition({x, y: y + buffer})
+                activeCard.setPosition({x, y: y + VARS.spacing.buffer_larger})
                 activeCard.setFlipPile(false);
                 VARS.flipPile.splice(VARS.flipPile.indexOf(activeCard), 1);
                 VARS.revealNextCard(VARS.flipPile)

@@ -22,11 +22,13 @@ const PileToSlot = {
     },
     addCardToSlot: function (actvieCard, slot) {
 
-        let { drawPile, _index } = actvieCard;
+        let { flipPile, _index } = actvieCard;
         actvieCard.setClickability(false);
         actvieCard.setPosition({x: slot.x, y: slot.y})
 
-        let tempArray = (!drawPile) ? VARS.piles[_index] : VARS.flipPile;
+
+
+        let tempArray = (!flipPile) ? VARS.piles[_index] : VARS.flipPile;
         tempArray.splice(tempArray.indexOf(actvieCard), 1);
         actvieCard.setDrawPile(false);
         slot.rank ++;

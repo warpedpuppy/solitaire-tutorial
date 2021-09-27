@@ -10,7 +10,9 @@ const Deal = {
     totalColumns: 7,
     xOffset: 0,
     start: function () {
+        
         VARS.deck = [...VARS.allVisualAssets]
+
 
         this.startX = VARS.build.cardWidth + VARS.spacing.buffer_larger;
         this.startY = VARS.build.cardHeight + VARS.spacing.buffer_larger;

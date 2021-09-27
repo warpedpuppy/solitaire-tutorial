@@ -1,41 +1,44 @@
-import Deck from './cards/Deck.js';
 import VARS from './utils/Vars.js';
+import Deal from './cards/Deal.js';
+import Deck from './cards/Deck.js';
+import Utils from './utils/Utils.js';
+import MouseDown from './action/MouseDown.js';
+import MouseUp from './action/MouseUp.js';
+import Draw from './action/Draw.js';
 const Solitaire = {
     canvas: document.getElementById('tutorial'),
+    activeCard: undefined,
+    drag: false,
+    init: function () {
+        const { canvas } = VARS;
+        const ctx = canvas.getContext('2d');
+
+        Deck.build();
+        Deal.start();
+        this.addListeners();
+        Draw.start(ctx);
+
+    },
     addListeners: function () {
-        this.determineMousePosition();
+        this.mouseMoveHandler();
+        this.mouseDownHandler();
+        this.mouseUpHandler();
     },
-    trackMousePosition: function () {
-        this.canvas.addEventListener('mousemove', e => mousePoint = {x: e.pageX, y: e.pageY} )
+    mouseMoveHandler: function () {
+        this.canvas.addEventListener('mousemove', e => VARS.mousePoint = {x: e.pageX, y: e.pageY} )
     },
-    setActiveCard: function () {
-        const { deck } = VARS;
-        this.canvas.addEventListener('mousedown', e => {
-
-            // determine active card
-            deck.forEach( (card, i) => {
-                const { x, y, clickable } = card;
-                if (clickable) {
-                    let rect = {x, y, width: cardWidth, height: cardHeight};
-                    hit = pointRectangleCollisionDetection(mousePoint, rect);
-                    if (hit) {
-                        drag = true;
-                        activeCard = i;
-                        xDiff = mousePoint.x - deck[i].x;
-                        yDiff = mousePoint.y - deck[i].y;
-                    
-                    } 
-                }
-                
-            })
-            //move to top
-            if (activeCard !== undefined) {
-                let card = deck.splice(activeCard, 1)[0];
-                deck.push(card)
-                activeCard = deck.length - 1;
-            }
-        })
+    mouseDownHandler: function () {
+        this.canvas.addEventListener('mousedown', () => {
+            MouseDown.setActiveCardAndPopulateDragArray();
+            MouseDown.moveVisualAssetsToTop();
+        } )
+    },
+    mouseUpHandler: function () {
+        this.canvas.addEventListener('mouseup', e => {
+            if (VARS.activeCard) MouseUp.activeCardExists();
+            if (VARS.flipPileReset) MouseUp.flipPileReset();
+            VARS.resetValues();
+        });
     }
-
 }
 export default Solitaire

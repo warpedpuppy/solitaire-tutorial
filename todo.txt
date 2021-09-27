@@ -1,2 +1,14 @@
 1) unify pile to slot and pile to pile
 2) change active card to object
+
+
+IF MOVE MULTIPLE CARDS TO A MARKER IT COLLAPSES THEM
+
+
+presentation notes:
+
+1) canvas functioning illustration
+
+2) array shuffle illustration
+
+3) illustrate that even though imported into several pages -- same object
