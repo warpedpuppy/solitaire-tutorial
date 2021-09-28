@@ -21,5 +21,5 @@ const Utils = {
     return arr[arr.length - 1];
   }
 }
-}
+
 export default Utils;
