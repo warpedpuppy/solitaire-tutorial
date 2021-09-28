@@ -16,6 +16,10 @@ const Utils = {
     let cardToShiftUp = array.splice(moveIndex, 1)[0];
     array.push(cardToShiftUp);
     return cardToShiftUp
+  },
+  returnLastArrayItem: function (arr) {
+    return arr[arr.length - 1];
   }
+}
 }
 export default Utils;

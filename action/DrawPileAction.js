@@ -27,11 +27,11 @@ const DrawPileAction =  {
             VARS.flipPileReset = true;
             VARS.resetDrawPileButton.clickable = true;
         } else {
-            let topFlipPileCard = VARS.drawPile[VARS.drawPile.length - 1]
+            let topFlipPileCard = Utils.returnLastArrayItem(VARS.drawPile)
             topFlipPileCard.setClickability(true);
         }
 
-        let topCard = VARS.flipPile[VARS.flipPile.length - 1];
+        let topCard = Utils.returnLastArrayItem(VARS.flipPile);
         topCard.setClickability(true);
 
     },

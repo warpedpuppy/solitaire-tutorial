@@ -1,3 +1,4 @@
+
 const VARS = {
     allVisualAssets: [],
     mousePoint: {x: 0, y: 0},
@@ -31,16 +32,7 @@ const VARS = {
             card.yOffset = 0;
         });
         this.dragContainer = []
-    },
-    revealNextCard(arr) {
-        if (arr.length) {
-            let finalIndex = arr.length - 1;
-            let newTopCard = arr[finalIndex];
-            if (!newTopCard.marker) {
-                newTopCard.reveal(true);
-                newTopCard.setClickability(true);
-            }
-        }
     }
+    
 }
 export default VARS;
