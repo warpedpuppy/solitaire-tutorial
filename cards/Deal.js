@@ -18,17 +18,18 @@ const Deal = {
         this.startY = VARS.build.cardHeight + VARS.spacing.buffer_larger;
 
         let gameBoardWidth = (VARS.build.cardWidth * 8)  + (VARS.spacing.buffer * 6 ) + VARS.spacing.buffer_larger;
-        this.xOffset = (document.getElementById('tutorial').width - gameBoardWidth) / 2;
+        this.xOffset = (VARS.canvas.width - gameBoardWidth) / 2;
         let xOffset = this.xOffset;
+
         // PILES
         let { adjustedCardCounter } = this.createCardPiles(xOffset);
-       this.createDrawPileResetButton(xOffset);
+        this.createDrawPileResetButton(xOffset);
 
         // DRAW PILE
-         let arr = VARS.deck.slice(adjustedCardCounter, 52)
-         this.createDrawPile( arr, true, xOffset);
+        let arr = VARS.deck.slice(adjustedCardCounter, 52)
+        this.createDrawPile( arr, true, xOffset);
 
-        // // SLOTS 
+        // SLOTS 
         this.createSlots();
         
       
@@ -40,7 +41,6 @@ const Deal = {
         for (let i = 0; i < this.loopingQ; i++) { 
            let marker = Marker();
             marker.build(xOffset + (this.startX + (VARS.build.cardWidth + VARS.spacing.buffer) * i),this.startY, i);
-            // console.log(marker);
             VARS.allVisualAssets.unshift(marker);
             VARS.piles[i] = [marker];
         }

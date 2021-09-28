@@ -16,6 +16,7 @@ const Solitaire = {
         Deck.build();
         Deal.start();
         this.addListeners();
+        
         Draw.start(ctx);
 
     },

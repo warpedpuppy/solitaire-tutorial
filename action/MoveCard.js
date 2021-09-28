@@ -4,52 +4,52 @@ import Utils from '../utils/Utils.js';
 const MoveCard = {
     moveCardListener: function (activeCard) {
 
-        let arr = [...VARS.slots, ...Object.keys(VARS.piles).map( item => VARS.piles[item][VARS.piles[item].length - 1])]
-        for (let i = 0; i < arr.length; i++) {
-            let item = arr[i];
-             let alternatingSuitAndOneLower = (item.color !== activeCard.color && item.rank === (activeCard.rank + 1));
+        let arr = [...VARS.slots, ...Object.keys(VARS.piles).map( item => VARS.piles[item][VARS.piles[item].length - 1])];
 
-            if ( Utils.rectangleRectangleCollisionDetection(item, activeCard)) {
+        let item = arr.find( card => {
+           
+            if ( Utils.rectangleRectangleCollisionDetection(card, activeCard)) {
 
-                if (item.rank === activeCard.rank && item.suit === activeCard.suit && item.slot && VARS.dragContainer.length === 1 ) {
-                    return { hit: true, slot: item };
-                } else if (alternatingSuitAndOneLower || item.marker) {
-                    return { hit: true, topCard: item, key: item._index }
-                }
+                let alternatingSuitAndOneLower = (card.color !== activeCard.color && card.rank === (activeCard.rank + 1));
+                let slotHit = card.rank === activeCard.rank && card.suit === activeCard.suit && card.slot && VARS.dragContainer.length === 1 ;
+
+                if (slotHit ||  alternatingSuitAndOneLower || card.marker) {
+                    return true;
+                } 
             }
-        }
-        return { hit: false }
+
+        })
+
+        return item ? { hit: true, target: item } : { hit: false } ;
+
+
     },
-    movePiles: function (topCard, key, activeCard) {
-       
-        let { x, y } = topCard.getPosition();
-        let markerAdjust = topCard.marker ? 0 : 1 ;
+    moveCard: function (target, activeCard) {
+
+        let { x, y, _index: pileKey, slot, marker} = target;
         let { _index, flipPile } =  activeCard;
+        let markerAdjust = marker ? 0 : 1 ;
 
         let tempArray = (!flipPile) ? VARS.piles[_index] : VARS.flipPile ;
 
         VARS.dragContainer.forEach( (card, i) => {
-            
-            card.setPosition({x, y: y + (VARS.spacing.buffer_larger * ( i + markerAdjust) )});
-            let indexOfCardInFormerPile = tempArray.indexOf(card);
-            tempArray.splice(indexOfCardInFormerPile, 1);
-            VARS.piles[key].push(card);
-            card.setIndex(+key);
+
+            tempArray.splice(tempArray.indexOf(card), 1);
+            let yPos = y;
+
+            if (!slot) {
+                VARS.piles[pileKey].push(card);
+                card.setIndex(+pileKey);
+                yPos = y + (VARS.spacing.buffer_larger * ( i + markerAdjust) );
+            } else {
+                target.rank ++;
+                card.setClickability(false);
+            }
+
+            card.setPosition({x, y: yPos});
         })
+
         VARS.revealNextCard(tempArray)
-          
-    },
-    addCardToSlot: function (actvieCard, slot) {
-
-        let { flipPile, _index } = actvieCard;
-
-        actvieCard.setClickability(false);
-        actvieCard.setPosition({x: slot.x, y: slot.y})
-
-        let tempArray = (!flipPile) ? VARS.piles[_index] : VARS.flipPile ;
-        tempArray.splice(tempArray.indexOf(actvieCard), 1);
-        slot.rank ++;
-        VARS.revealNextCard(tempArray);
     }
 }
 export default MoveCard;

@@ -12,10 +12,8 @@ const MouseUp = {
         } else {
             let result = MoveCard.moveCardListener(activeCard)
 
-            if (result.hit && result.slot) {
-                MoveCard.addCardToSlot(activeCard, result.slot)
-            } else if (result.hit && result.key !== undefined) {
-                MoveCard.movePiles(result.topCard, result.key, activeCard);
+            if ( result.hit ) {
+                MoveCard.moveCard(result.target, activeCard)
             } else {
                 VARS.dragContainer.forEach( card => {
                     card.resetPositionToStore()
