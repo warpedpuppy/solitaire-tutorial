@@ -5,10 +5,9 @@ import Utils from './utils/Utils.js';
 import MouseDown from './action/MouseDown.js';
 import MouseUp from './action/MouseUp.js';
 import Draw from './action/Draw.js';
+import FlipPile from './visualAssets/FlipPile.js';
 const Solitaire = {
     canvas: document.getElementById('tutorial'),
-    activeCard: undefined,
-    drag: false,
     init: function () {
         const { canvas } = VARS;
         const ctx = canvas.getContext('2d');
@@ -36,8 +35,7 @@ const Solitaire = {
     },
     mouseUpHandler: function () {
         this.canvas.addEventListener('mouseup', e => {
-            if (VARS.activeCard) MouseUp.activeCardExists();
-            if (VARS.flipPileReset) MouseUp.flipPileReset();
+            MouseUp.activeCardExists();
             VARS.resetValues();
         });
     }

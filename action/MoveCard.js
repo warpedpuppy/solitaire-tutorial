@@ -1,6 +1,6 @@
 import VARS from '../utils/Vars.js';
 import Utils from '../utils/Utils.js';
-
+import FlipPile from '../visualAssets/FlipPile.js';
 const MoveCard = {
     moveCardListener: function(activeCard) {
 
@@ -30,7 +30,7 @@ const MoveCard = {
         let { _index, flipPile } = activeCard;
         let markerAdjust = marker ? 0 : 1;
 
-        let tempArray = (!flipPile) ? VARS.piles[_index] : VARS.flipPile;
+        let tempArray = (!flipPile) ? VARS.piles[_index] : FlipPile.arr;
 
         VARS.dragContainer.forEach((card, i) => {
 
@@ -42,7 +42,7 @@ const MoveCard = {
                 card.setIndex(+pileKey);
                 yPos = y + (VARS.spacing.buffer_larger * (i + markerAdjust));
             } else {
-                target.rank++;
+                target.increaseSlotRank();
                 card.setClickability(false);
             }
 

@@ -5,13 +5,9 @@ const VARS = {
     xyDiff: {x: 0, y: 0},
     activeCard: undefined,
     deck: [],
-    drawPile: [],
-    flipPile: [],
     piles: {},
     slots: [],
     dragContainer: [],
-    resetDrawPileButton: undefined,
-    flipPileReset: false,
     canvas: document.querySelector('canvas'),
     spacing: {
         buffer: 10,

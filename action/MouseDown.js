@@ -9,13 +9,14 @@ const MouseDown = {
             
            const { x, y, clickable, drawPile } = card;
            
-           if ( clickable ) {
+           if (clickable) {
                let rect = {x, y, width: cardWidth, height: cardHeight};
                let hit = Utils.pointRectangleCollisionDetection(mousePoint, rect);
                if (hit) {
                    VARS.activeCard = card;
 
-                   card.storePosition();
+                   if (card.resetDrawPileButton) return;
+
                    VARS.xyDiff.x = mousePoint.x - card.x;
                    VARS.xyDiff.y = mousePoint.y - card.y;
 

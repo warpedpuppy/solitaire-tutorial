@@ -2,6 +2,7 @@ import Deck from './Deck.js';
 import Marker from '../visualAssets/Marker.js';
 import Slot from '../visualAssets/Slot.js';
 import VARS from '../utils/Vars.js';
+import DrawPile from '../visualAssets/DrawPile.js';
 const Deal = {
     loopingQ: 7, 
     cardCounter: 0,
@@ -23,11 +24,11 @@ const Deal = {
 
         // PILES
         let { adjustedCardCounter } = this.createCardPiles(xOffset);
-        this.createDrawPileResetButton(xOffset);
+        DrawPile.createResetButton(xOffset, this.startY);
 
         // DRAW PILE
         let arr = VARS.deck.slice(adjustedCardCounter, 52)
-        this.createDrawPile( arr, true, xOffset);
+        DrawPile.create( arr, true, xOffset);
 
         // SLOTS 
         this.createSlots();
@@ -85,39 +86,19 @@ const Deal = {
         }
         return { adjustedCardCounter: this.cardCounter, adjustedStartY: this.startY }
     },
-    createDrawPileResetButton(xOffset) {
-        let img = new Image();
-        img.src = '/bmps/marker.png';
-        VARS.resetDrawPileButton = {
-            img,
-            x: xOffset,
-            y : this.startY,
-            clickable: false,
-            resetDraw: true,
-        }
+    // createDrawPileResetButton(xOffset) {
+    //     let img = new Image();
+    //     img.src = '/bmps/marker.png';
+    //     VARS.resetDrawPileButton = {
+    //         img,
+    //         x: xOffset,
+    //         y : this.startY,
+    //         clickable: false,
+    //         resetDraw: true,
+    //     }
         
-        VARS.allVisualAssets.unshift(VARS.resetDrawPileButton)
-    },
-    createDrawPile(arr, init) {
-
-        let yVal = VARS.build.cardHeight + VARS.spacing.buffer_larger;
-        let topCard;
-        arr.forEach(card => {
-
-            card.setDrawPile(true);
-            card.setPosition({x: this.xOffset, y: yVal});
-            card.reveal(false);
-            
-            yVal += 0.25;
-            if (init) {
-                VARS.drawPile.push(card)
-                // VARS.cardsWithListeners.push(card)};
-            };
-            topCard = card;
-
-        })
-        topCard.setClickability(true);
-    },
+    //     VARS.allVisualAssets.unshift(VARS.resetDrawPileButton)
+    // },
     createSlots() {
         let width = 0;
         let allFourSlotWidths = (VARS.build.cardWidth + VARS.spacing.slot_spacer) * 4;

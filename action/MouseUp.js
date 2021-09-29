@@ -1,14 +1,17 @@
 
 import MoveCard from '../action/MoveCard.js';
 import VARS from '../utils/Vars.js';
-import DrawPileAction from '../action/DrawPileAction.js';
-import Utils from '../utils/Utils.js';
+import DrawPile from '../visualAssets/DrawPile.js';
+
 const MouseUp = {
     activeCardExists: function () {
+ 
         const { activeCard } = VARS;
         
-        if (activeCard.drawPile) {
-            DrawPileAction.drawPileClickHandler();
+        if (activeCard.resetDrawPileButton) {
+            DrawPile.reset();
+        } else if (activeCard.drawPile) {
+            DrawPile.clickHandler();
         } else {
             let result = MoveCard.moveCardListener(activeCard)
 
@@ -20,16 +23,6 @@ const MouseUp = {
                 })
             }
         }
-    },
-    flipPileReset: function () {
-        const { resetDrawPileButton, mousePoint, build } = VARS;
-        const { cardWidth, cardHeight } = build;
-        let rect = {x: resetDrawPileButton.x, y: resetDrawPileButton.y, width: cardWidth, height: cardHeight};
-        let hit = Utils.pointRectangleCollisionDetection(mousePoint, rect);
-        if (hit) {
-            DrawPileAction.resetDrawPileHandler();
-            resetDrawPileButton.clickable = false;
-        } 
     }
 }
 export default MouseUp;
