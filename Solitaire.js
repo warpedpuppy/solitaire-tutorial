@@ -1,18 +1,39 @@
-import Deck from './cards/Deck.js';
 import VARS from './utils/Vars.js';
+import Deal from './cards/Deal.js';
+import Deck from './cards/Deck.js';
+import MouseDown from './action/MouseDown.js';
+import MouseUp from './action/MouseUp.js';
+import Animate from './action/Animate.js';
 const Solitaire = {
-    gameBoard: new PIXI.Container(),
-    build: function(app) {
-        
-        app.stage.addChild(this.gameBoard)
-        
-        this.deck = Deck.build();
-        Deck.layOutInGrid(this.gameBoard)
+    canvas: document.getElementById('tutorial'),
+    init: function () {
+        const { canvas } = VARS;
+        const ctx = canvas.getContext('2d');
 
-        this.gameBoard.x = (VARS.canvasWidth - this.gameBoard.width) / 2;
-        this.gameBoard.y = (VARS.canvasHeight - this.gameBoard.height) / 2
+        Deck.build();
+        Deal.start();
+        this.addListeners();
+        
+        Animate.start(ctx);
 
+    },
+    addListeners: function () {
+        this.mouseMoveHandler();
+        this.mouseDownHandler();
+        this.mouseUpHandler();
+    },
+    mouseMoveHandler: function () {
+        this.canvas.addEventListener('mousemove', e => VARS.mousePoint = {x: e.pageX, y: e.pageY} )
+    },
+    mouseDownHandler: function () {
+        this.canvas.addEventListener('mousedown', () => {
+            MouseDown.setActiveCardAndPopulateDragArray();
+        } )
+    },
+    mouseUpHandler: function () {
+        this.canvas.addEventListener('mouseup', e => {
+            if (VARS.activeCard) MouseUp.activeCardExists();
+        });
     }
-
 }
 export default Solitaire

@@ -1,29 +1,22 @@
-import VARS from "../utils/Vars.js";
+class VisualAsset {
 
-const Card =  function () {
-    return {
+    constructor () {
+
+    }
+    
+    setPosition()
         img: undefined,
-        cardFront: undefined,
-        cardBack: undefined,
         rank: undefined,
         suit: undefined,
         color: undefined,
         x: undefined,
         y: undefined,
-        storeX: undefined,
-        storeY: undefined,
         value: undefined,
         clickable: false,
         drawPile: false,
-        flipPile: false,
         card: true,
-        width: undefined,
-        height: undefined,
-        _index: undefined,
-        dragYOffset: 0,
         build: function (rank, suit, value, x, y) {
-            let indexOfRank = VARS.build.ranks.indexOf(rank);
-            this.rank = indexOfRank + 1;
+            this.rank = rank + 1;
             this.suit = suit;
             this.img = new Image();
             this.cardFront = `bmps/card_bmps/${rank}_${suit}.png`;
@@ -32,24 +25,11 @@ const Card =  function () {
             this.value = value;
             this.x = x;
             this.y = y;
-            this.width = VARS.build.cardWidth;
-            this.height = VARS.build.cardHeight;
             this.reveal(true);
-        },
-        setIndex: function (index) {
-            this._index = index;
         },
         setPivot: function (pivotObject) {
             this.x -= pivotObject.x;
             this.y -= pivotObject.y;
-        },
-        storePosition: function () {
-            this.storeX = this.x;
-            this.storeY = this.y;
-        },
-        resetPositionToStore: function () {
-            this.x = this.storeX;
-            this.y = this.storeY;
         },
         getPosition: function() {
             return { x: this.x, y: this.y }
@@ -66,10 +46,7 @@ const Card =  function () {
         },
         setDrawPile: function (boolean) {
             this.drawPile = boolean;
-        },
-        setFlipPile: function (boolean) {
-            this.flipPile = boolean;
         }
     }
 }
-export default Card;
+export default VisualAsset;

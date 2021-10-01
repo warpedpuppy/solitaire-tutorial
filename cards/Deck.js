@@ -1,27 +1,39 @@
 import Card from './Card.js';
-
+import VARS from '../utils/Vars.js';
 const Deck = {
-    deck: [],
     build: function () {
-        for (let i = 0; i < 4; i ++) {
-            for (let j = 0; j < 13; j++) {
+        let { allVisualAssets } = VARS;
+        const { suits, ranks } = VARS.build;
+        let value = 1;
+        let temp = []
+        suits.forEach( (suit, i) => {
+            ranks.forEach( (rank, j) => {
                 let card = Card();
-                card.build(j, i);
-                card.this = this;
-                card.reveal(true)
-                this.deck.push(card.cont);
-            }
-        }
-        return this.deck;
+                card.build(rank, suit, value, j * 50, i * 100);
+                allVisualAssets.push(card);
+                value ++;
+            })
+        })
+        // VARS.allVisualAssets = this.shuffle(VARS.allVisualAssets)
     },
-    layOutInGrid (gameBoard) {
+    shuffle: function(arr) {
+        let currentIndex = arr.length,  randomIndex;
+        while (currentIndex != 0) {
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex--;
+          // ec6 destructuring allows us define two variables at once!
+          [arr[currentIndex], arr[randomIndex]] = [arr[randomIndex], arr[currentIndex]];
+        }
+        return arr;
+    },
+    layOutInGrid () {
         let cardCounter = 0;
         for (let i = 0; i < 4; i ++) {
             for (let j = 0; j < 13; j ++) {
-                let card = this.deck[cardCounter]
-                card.x = j * 50;
-                card.y = i * 160;
-                gameBoard.addChild(card)
+                let card = VARS.deck[cardCounter]
+                card.setPosition({x: j * 50, y: i * 160})
+                card.addToGameBoard(VARS.gameBoard);
+                
                 cardCounter++;
             }
         }
