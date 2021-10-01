@@ -30,3 +30,8 @@ step-three: deal solitaire, add a lot to card
 step-four: cursor pointer, point rectangle collision
 
 step-five: draw pile
+step-six: drag
+step-seven: rectangle rectangle collision
+step-eight: multiple card drag
+step-nine: classes and inheritance
+step-ten: abstraction, polymorphism, inheritance, encapsulation
