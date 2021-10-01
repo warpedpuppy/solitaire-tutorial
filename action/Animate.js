@@ -5,13 +5,12 @@ const Animate = {
     counter: 0,
     start: function() {
 
-        const { mousePoint, xyDiff, ctx, canvas } = VARS;
+        const { mousePoint, ctx, canvas } = VARS;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         let over = [];
 
         VARS.allVisualAssets.forEach(card => {
             const { img, x, y, clickable } = card;
-
 
             ctx.drawImage(img, x, y);
 
@@ -19,12 +18,6 @@ const Animate = {
                 let rect = { x, y, width: 100, height: 150 };
                 let hit = Utils.pointRectangleCollisionDetection(mousePoint, rect);
                 over.push(hit);
-            }
-
-            if (DragContainer.includes(card)) {
-                let x = mousePoint.x - xyDiff.x;
-                let y = (mousePoint.y - xyDiff.y) + card.yOffset;
-                card.setPosition({ x, y })
             }
 
         })
