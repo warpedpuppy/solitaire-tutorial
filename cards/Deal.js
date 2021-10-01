@@ -89,7 +89,7 @@ const Deal = {
     createSlots() {
         let width = 0;
         let allFourSlotWidths = (VARS.build.cardWidth + VARS.spacing.slot_spacer) * 4;
-        let xOffset = (document.getElementById('tutorial').width - allFourSlotWidths) / 2;
+        let xOffset = (VARS.canvas.width - allFourSlotWidths) / 2;
         for (let i = 0; i < 4; i++) {
             let imageString = `/bmps/slot${VARS.build.suits[i].charAt(0).toUpperCase()}${VARS.build.suits[i].substring(1, VARS.build.suits[i].length)}.png`; 
             let xVal = xOffset + ((VARS.build.cardWidth + VARS.spacing.slot_spacer) * i);
