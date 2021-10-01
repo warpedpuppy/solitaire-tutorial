@@ -22,3 +22,9 @@ presentation notes:
 7) casting
 
 8) point out why I use for v forEach -- because I want a return statement to shut it down
+
+
+step-one: create canvas, place card
+step-two: create card factory function
+step-three: deal solitaire, add a lot to card
+step-four: cursor pointer, drag
