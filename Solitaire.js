@@ -4,16 +4,11 @@ import Card from './cards/Card.js';
 const Solitaire = {
     init: function () {
 
-        let cardImage = new Image();
-        cardImage.src = '/bmps/card_bmps/ace_hearts.png';
+        let AceHearts = Card().build("ace", "hearts", 0, 0, 0);
+        VARS.allVisualAssets.push(AceHearts);
 
-        let AceHearts = {
-            img: cardImage,
-            x: 0,
-            y: 0
-        }
-        
-        VARS.allVisualAssets.push(AceHearts)
+        let TwoHearts = Card().build("two", "hearts", 1, 175, 0);
+        VARS.allVisualAssets.push(TwoHearts);
 
         VARS.init();
         Animate.start();
