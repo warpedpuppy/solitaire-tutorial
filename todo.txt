@@ -22,3 +22,8 @@ presentation notes:
 7) casting
 
 8) point out why I use for v forEach -- because I want a return statement to shut it down
+
+
+
+step-one: make image, give x y, put it on canvas;
+step-two: card class

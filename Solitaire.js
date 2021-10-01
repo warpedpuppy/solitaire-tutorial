@@ -1,39 +1,23 @@
 import VARS from './utils/Vars.js';
-import Deal from './cards/Deal.js';
-import Deck from './cards/Deck.js';
-import MouseDown from './action/MouseDown.js';
-import MouseUp from './action/MouseUp.js';
 import Animate from './action/Animate.js';
+import Card from './cards/Card.js';
 const Solitaire = {
-    canvas: document.getElementById('tutorial'),
     init: function () {
-        const { canvas } = VARS;
-        const ctx = canvas.getContext('2d');
 
-        Deck.build();
-        Deal.start();
-        this.addListeners();
+        let cardImage = new Image();
+        cardImage.src = '/bmps/card_bmps/ace_hearts.png';
+
+        let AceHearts = {
+            img: cardImage,
+            x: 0,
+            y: 0
+        }
         
-        Animate.start(ctx);
+        VARS.allVisualAssets.push(AceHearts)
 
-    },
-    addListeners: function () {
-        this.mouseMoveHandler();
-        this.mouseDownHandler();
-        this.mouseUpHandler();
-    },
-    mouseMoveHandler: function () {
-        this.canvas.addEventListener('mousemove', e => VARS.mousePoint = {x: e.pageX, y: e.pageY} )
-    },
-    mouseDownHandler: function () {
-        this.canvas.addEventListener('mousedown', () => {
-            MouseDown.setActiveCardAndPopulateDragArray();
-        } )
-    },
-    mouseUpHandler: function () {
-        this.canvas.addEventListener('mouseup', e => {
-            if (VARS.activeCard) MouseUp.activeCardExists();
-        });
+        VARS.init();
+        Animate.start();
+
     }
 }
 export default Solitaire
