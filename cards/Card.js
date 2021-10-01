@@ -20,7 +20,6 @@ const Card =  function () {
         width: undefined,
         height: undefined,
         _index: undefined,
-        activeCard: false,
         dragYOffset: 0,
         build: function (rank, suit, value, x, y) {
             let indexOfRank = VARS.build.ranks.indexOf(rank);

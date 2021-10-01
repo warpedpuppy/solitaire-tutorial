@@ -1,6 +1,7 @@
 import VARS from '../utils/Vars.js';
 import Utils from '../utils/Utils.js';
-const Draw = {
+import DragContainer from '../visualAssets/DragContainer.js';
+const Animate = {
     counter: 0,
     start: function(ctx) {
 
@@ -20,7 +21,7 @@ const Draw = {
                 over.push(hit);
             }
 
-            if (VARS.dragContainer.includes(card)) {
+            if (DragContainer.includes(card)) {
                 let x = mousePoint.x - xyDiff.x;
                 let y = (mousePoint.y - xyDiff.y) + card.yOffset;
                 card.setPosition({ x, y })
@@ -41,4 +42,4 @@ const Draw = {
 
     }
 }
-export default Draw;
+export default Animate;

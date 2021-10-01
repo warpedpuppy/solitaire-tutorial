@@ -2,7 +2,7 @@
 import MoveCard from '../action/MoveCard.js';
 import VARS from '../utils/Vars.js';
 import DrawPile from '../visualAssets/DrawPile.js';
-
+import DragContainer from '../visualAssets/DragContainer.js';
 const MouseUp = {
     activeCardExists: function () {
  
@@ -18,11 +18,12 @@ const MouseUp = {
             if ( result.hit ) {
                 MoveCard.moveCard(result.target, activeCard)
             } else {
-                VARS.dragContainer.forEach( card => {
-                    card.resetPositionToStore()
-                })
+                DragContainer.returnCards();
             }
         }
+
+        DragContainer.reset();
+        VARS.activeCard = undefined;
     }
 }
 export default MouseUp;

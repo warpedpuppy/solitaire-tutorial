@@ -86,19 +86,6 @@ const Deal = {
         }
         return { adjustedCardCounter: this.cardCounter, adjustedStartY: this.startY }
     },
-    // createDrawPileResetButton(xOffset) {
-    //     let img = new Image();
-    //     img.src = '/bmps/marker.png';
-    //     VARS.resetDrawPileButton = {
-    //         img,
-    //         x: xOffset,
-    //         y : this.startY,
-    //         clickable: false,
-    //         resetDraw: true,
-    //     }
-        
-    //     VARS.allVisualAssets.unshift(VARS.resetDrawPileButton)
-    // },
     createSlots() {
         let width = 0;
         let allFourSlotWidths = (VARS.build.cardWidth + VARS.spacing.slot_spacer) * 4;

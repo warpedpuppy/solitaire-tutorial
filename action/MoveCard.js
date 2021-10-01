@@ -1,6 +1,7 @@
 import VARS from '../utils/Vars.js';
 import Utils from '../utils/Utils.js';
 import FlipPile from '../visualAssets/FlipPile.js';
+import DragContainer from '../visualAssets/DragContainer.js';
 const MoveCard = {
     moveCardListener: function(activeCard) {
 
@@ -11,7 +12,7 @@ const MoveCard = {
             if (Utils.rectangleRectangleCollisionDetection(card, activeCard)) {
 
                 let alternatingSuitAndOneLower = (card.color !== activeCard.color && card.rank === (activeCard.rank + 1));
-                let slotHit = card.rank === activeCard.rank && card.suit === activeCard.suit && card.slot && VARS.dragContainer.length === 1;
+                let slotHit = card.rank === activeCard.rank && card.suit === activeCard.suit && card.slot && DragContainer.length() === 1;
 
                 if (slotHit || alternatingSuitAndOneLower || card.marker) {
                     return true;
@@ -32,7 +33,7 @@ const MoveCard = {
 
         let tempArray = (!flipPile) ? VARS.piles[_index] : FlipPile.arr;
 
-        VARS.dragContainer.forEach((card, i) => {
+        DragContainer.arr.forEach((card, i) => {
 
             tempArray.splice(tempArray.indexOf(card), 1);
             let yPos = y;
