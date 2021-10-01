@@ -7,8 +7,11 @@ const VARS = {
     deck: [],
     piles: {},
     slots: [],
-    // dragContainer: [],
+    ctx: undefined,
     canvas: document.querySelector('canvas'),
+    init: function () {
+        this.ctx = this.canvas.getContext('2d')
+    },
     spacing: {
         buffer: 10,
         buffer_larger: 40,

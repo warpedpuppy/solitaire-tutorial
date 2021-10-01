@@ -5,16 +5,17 @@ import MouseDown from './action/MouseDown.js';
 import MouseUp from './action/MouseUp.js';
 import Animate from './action/Animate.js';
 const Solitaire = {
-    canvas: document.getElementById('tutorial'),
+    canvas: undefined,
     init: function () {
+
         const { canvas } = VARS;
-        const ctx = canvas.getContext('2d');
+        this.canvas = canvas;
 
         Deck.build();
         Deal.start();
         this.addListeners();
         
-        Animate.start(ctx);
+        Animate.start();
 
     },
     addListeners: function () {

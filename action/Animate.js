@@ -3,10 +3,10 @@ import Utils from '../utils/Utils.js';
 import DragContainer from '../visualAssets/DragContainer.js';
 const Animate = {
     counter: 0,
-    start: function(ctx) {
+    start: function() {
 
-        const { mousePoint, xyDiff } = VARS;
-        ctx.clearRect(0, 0, VARS.canvas.width, VARS.canvas.height);
+        const { mousePoint, xyDiff, ctx, canvas } = VARS;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         let over = [];
 
         VARS.allVisualAssets.forEach(card => {
@@ -31,7 +31,7 @@ const Animate = {
 
         this.cursor(over.includes(true));
 
-        requestAnimationFrame(() => this.start(ctx));
+        requestAnimationFrame(() => this.start());
     },
     cursor: function(boolean) {
         if (boolean) {
