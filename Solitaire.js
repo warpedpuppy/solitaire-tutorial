@@ -8,8 +8,8 @@ const Solitaire = {
     canvas: undefined,
     init: function () {
 
-        const { canvas } = VARS;
-        this.canvas = canvas;
+        VARS.init();
+        this.canvas = VARS.canvas;
 
         Deck.build();
         Deal.start();
