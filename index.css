@@ -5,10 +5,29 @@
 
 body {
     background-color: #CCC;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+ul {
+    width: 450px;
+    margin: 0 auto;
 }
 
 canvas {
     display: block;
     margin: 0 auto;
     /* border: 1px solid green; */
+}
+
+.text {
+    color: red;
+    display: inline-block;
+    margin: 0 10px;
+    font-weight: bold;
+    ;
+}
+
+.green {
+    color: green;
 }
