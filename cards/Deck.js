@@ -8,8 +8,7 @@ const Deck = {
         let temp = []
         suits.forEach( (suit, i) => {
             ranks.forEach( (rank, j) => {
-                let card = Card();
-                card.build(rank, suit, value, j * 50, i * 100);
+                let card = Card().build(rank, suit, value, j * 50, i * 100);
                 allVisualAssets.push(card);
                 value ++;
             })

@@ -35,6 +35,7 @@ const Card =  function () {
             this.width = VARS.build.cardWidth;
             this.height = VARS.build.cardHeight;
             this.reveal(true);
+            return this;
         },
         setIndex: function (index) {
             this._index = index;
