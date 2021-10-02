@@ -1,6 +1,5 @@
 import VARS from '../utils/Vars.js';
 import Utils from '../utils/Utils.js';
-import DragContainer from '../visualAssets/DragContainer.js';
 const Animate = {
     counter: 0,
     start: function() {
@@ -21,9 +20,9 @@ const Animate = {
                 over.push(hit);
             }
 
-            if (DragContainer.includes(card)) {
+            if (card === VARS.activeCard && !card.drawPile) {
                 let x = mousePoint.x - xyDiff.x;
-                let y = (mousePoint.y - xyDiff.y) + card.yOffset;
+                let y = mousePoint.y - xyDiff.y;
                 card.setPosition({ x, y })
             }
 

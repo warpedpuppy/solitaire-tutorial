@@ -1,7 +1,6 @@
 import VARS from '../utils/Vars.js';
 import Utils from '../utils/Utils.js';
 import FlipPile from '../visualAssets/FlipPile.js';
-import DragContainer from '../visualAssets/DragContainer.js';
 const MoveCard = {
     moveCardListener: function(activeCard) {
 

@@ -1,6 +1,5 @@
 import VARS from "../utils/Vars.js";
 import Utils from "../utils/Utils.js";
-import DragContainer from "../visualAssets/DragContainer.js";
 const MouseDown = {
     setActiveCardAndPopulateDragArray: function () {
         const { build } = VARS,
@@ -17,31 +16,15 @@ const MouseDown = {
                    VARS.activeCard = card;
 
                    if (card.resetDrawPileButton) return;
+                   let currentPosition = card.getPosition()
+                   card.storePosition(currentPosition);
+                   VARS.xyDiff.x = mousePoint.x - currentPosition.x;
+                   VARS.xyDiff.y = mousePoint.y - currentPosition.y;
+                   Utils.moveToTopOfVisualAssets(card, VARS.allVisualAssets);
 
-                   VARS.xyDiff.x = mousePoint.x - card.x;
-                   VARS.xyDiff.y = mousePoint.y - card.y;
-
-                   DragContainer.reset();
-
-                   if (!drawPile) {
-                        DragContainer.add(VARS.activeCard)
-                   }
                } 
            }
        })
-       this.moveVisualAssetsToTop();
-   },
-   moveVisualAssetsToTop: function () {
-
-       const { arr } = DragContainer;
-       if ( arr.length) {
-            arr.forEach((card, i) => {
-               card.storePosition();
-               let cardToShiftUp = Utils.moveToTopOfVisualAssets(card, VARS.allVisualAssets); 
-               cardToShiftUp.yOffset = i * VARS.spacing.buffer_larger;
-               i++;
-           })
-       }
    }
 }
 export default MouseDown;
