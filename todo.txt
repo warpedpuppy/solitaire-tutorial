@@ -28,6 +28,7 @@ step-one: create canvas, place card
 step-two: create card factory function
 step-three: deal solitaire, add a lot to card
 step-four: cursor pointer, point rectangle collision
+step-four-a: quick illustration of point rectangle collision
 
 step-five: draw pile
 step-six: drag
