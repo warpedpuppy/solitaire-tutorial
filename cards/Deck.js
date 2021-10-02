@@ -5,7 +5,6 @@ const Deck = {
         let { allVisualAssets } = VARS;
         const { suits, ranks } = VARS.build;
         let value = 1;
-        let temp = []
         suits.forEach( (suit, i) => {
             ranks.forEach( (rank, j) => {
                 let card = Card().build(rank, suit, value, j * 50, i * 100);
