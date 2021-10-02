@@ -31,23 +31,20 @@ const MoveCard = {
         let markerAdjust = marker ? 0 : 1;
 
         let tempArray = (!flipPile) ? VARS.piles[_index] : FlipPile.arr;
+        let card = VARS.activeCard;
+        tempArray.splice(tempArray.indexOf(card), 1);
+        let yPos = y;
 
-        // DragContainer.arr.forEach((card, i) => {
-            let card = VARS.activeCard;
-            tempArray.splice(tempArray.indexOf(card), 1);
-            let yPos = y;
+        if (!slot) {
+            VARS.piles[pileKey].push(card);
+            card.setIndex(+pileKey);
+            yPos = y + (VARS.spacing.buffer_larger * (markerAdjust));
+        } else {
+            target.increaseSlotRank();
+            card.setClickability(false);
+        }
 
-            if (!slot) {
-                VARS.piles[pileKey].push(card);
-                card.setIndex(+pileKey);
-                yPos = y + (VARS.spacing.buffer_larger * (markerAdjust));
-            } else {
-                target.increaseSlotRank();
-                card.setClickability(false);
-            }
-
-            card.setPosition({ x, y: yPos });
-        // })
+        card.setPosition({ x, y: yPos });
 
         this.revealNextCard(tempArray)
     },
