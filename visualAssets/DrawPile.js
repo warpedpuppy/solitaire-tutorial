@@ -41,45 +41,6 @@ const DrawPile = {
         }
         VARS.allVisualAssets.unshift(this.resetButton);
  
-    },
-    clickHandler: function () {
-
-        FlipPile.clearClickabilities();
- 
-        let top3 = this.arr.splice(-3).reverse();
-
-        for (let i = 0; i < top3.length; i++) {
-            let card = top3[i];
-
-            Utils.moveToTopOfVisualAssets(card, VARS.allVisualAssets);
-            card.setClickability(false);
-            card.setDrawPile(false);
-            card.setFlipPile(true);
-            let cardPosition = {y: (VARS.build.cardHeight * 2 + 60) + (i * 10), x: card.getPosition().x };
-            card.setPosition(cardPosition);
-            card.reveal(true);
-        }
-
-        FlipPile.arr = [...FlipPile.arr, ...top3];
-
-        if (this.arr.length === 0) {
-            FlipPile.allowReset = true;
-            this.resetButton.clickable = true;
-        } else {
-
-            let topFlipPileCard = Utils.returnLastArrayItem(this.arr)
-            topFlipPileCard.setClickability(true);
-        }
-
-        let topCard = Utils.returnLastArrayItem(FlipPile.arr);
-        topCard.setClickability(true);
-
-    },
-    reset: function () {
-        this.arr = [...FlipPile.arr].reverse();
-        this.create(this.arr, false, this.x);
-        this.resetButton.clickable = false;
-        FlipPile.reset();
     }
 
 }
