@@ -1,4 +1,5 @@
 * {
+    font-family: 'Courier New', Courier, monospace;
     padding: 0;
     margin: 0;
 }
@@ -7,4 +8,21 @@ canvas {
     display: block;
     margin: 0 auto;
     border: 1px solid green;
+}
+
+#data {
+    width: 500px;
+    margin: 0 auto;
+}
+
+#data li {
+    margin-left: 25px;
+}
+
+.text {
+    color: red
+}
+
+.green {
+    color: green;
 }

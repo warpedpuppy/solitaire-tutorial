@@ -1,6 +1,7 @@
 import VARS from './utils/Vars.js';
 import Deal from './cards/Deal.js';
 import Deck from './cards/Deck.js';
+import Card from './cards/Card.js';
 import MouseDown from './action/MouseDown.js';
 import MouseUp from './action/MouseUp.js';
 import Animate from './action/Animate.js';
@@ -11,8 +12,8 @@ const Solitaire = {
         VARS.init();
         this.canvas = VARS.canvas;
 
-        Deck.build();
-        Deal.start();
+        let AceHearts = Card().build('ace', 'hearts', 0, (500-100)/2, 50);
+        VARS.allVisualAssets.push(AceHearts)
         this.addListeners();
         
         Animate.start();
@@ -26,7 +27,9 @@ const Solitaire = {
     mouseMoveHandler: function () {
         this.canvas.addEventListener('mousemove', e => {
             let leftOffset = (window.innerWidth - VARS.canvas.width) / 2;
+        
             VARS.mousePoint = {x: e.pageX - leftOffset, y: e.pageY};
+           
          })
     },
     mouseDownHandler: function () {
