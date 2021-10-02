@@ -31,7 +31,7 @@ const Solitaire = {
     },
     mouseDownHandler: function () {
         this.canvas.addEventListener('mousedown', () => {
-            MouseDown.setActiveCardAndPopulateDragArray();
+            MouseDown.setActiveCard();
         } )
     },
     mouseUpHandler: function () {

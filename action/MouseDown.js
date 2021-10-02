@@ -2,7 +2,7 @@ import VARS from "../utils/Vars.js";
 import Utils from "../utils/Utils.js";
 import DragContainer from "../visualAssets/DragContainer.js";
 const MouseDown = {
-    setActiveCardAndPopulateDragArray: function () {
+    setActiveCard: function () {
         const { build } = VARS,
             { cardWidth, cardHeight } = build;
         let { mousePoint } = VARS;
@@ -18,22 +18,6 @@ const MouseDown = {
 
                    if (card.resetDrawPileButton) return;
 
-                   VARS.xyDiff.x = mousePoint.x - card.x;
-                   VARS.xyDiff.y = mousePoint.y - card.y;
-
-                   DragContainer.reset();
-
-                   if (card._index !== undefined) {
-                       let pile = VARS.piles[card._index];
-                       let indexInPile = pile.indexOf(card);
-
-                       for (let i = indexInPile; i < pile.length; i++) {
-                        DragContainer.add(pile[i]);       
-                       }
-
-                   } else if (!drawPile) {
-                        DragContainer.add(VARS.activeCard)
-                   }
                } 
            }
        })

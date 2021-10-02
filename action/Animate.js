@@ -20,13 +20,6 @@ const Animate = {
                 let hit = Utils.pointRectangleCollisionDetection(mousePoint, rect);
                 over.push(hit);
             }
-
-            if (DragContainer.includes(card)) {
-                let x = mousePoint.x - xyDiff.x;
-                let y = (mousePoint.y - xyDiff.y) + card.yOffset;
-                card.setPosition({ x, y })
-            }
-
         })
 
         this.cursor(over.includes(true));
