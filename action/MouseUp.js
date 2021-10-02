@@ -13,13 +13,7 @@ const MouseUp = {
         } else if (activeCard.drawPile) {
             DrawPile.clickHandler();
         } else {
-            let result = MoveCard.moveCardListener(activeCard)
-
-            if ( result.hit ) {
-                MoveCard.moveCard(result.target, activeCard)
-            } else {
-                DragContainer.returnCards();
-            }
+            DragContainer.returnCards();
         }
 
         DragContainer.reset();

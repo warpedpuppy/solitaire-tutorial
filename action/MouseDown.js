@@ -23,15 +23,7 @@ const MouseDown = {
 
                    DragContainer.reset();
 
-                   if (card._index !== undefined) {
-                       let pile = VARS.piles[card._index];
-                       let indexInPile = pile.indexOf(card);
-
-                       for (let i = indexInPile; i < pile.length; i++) {
-                        DragContainer.add(pile[i]);       
-                       }
-
-                   } else if (!drawPile) {
+                   if (!drawPile) {
                         DragContainer.add(VARS.activeCard)
                    }
                } 
