@@ -18,9 +18,11 @@ const MouseDown = {
                    if (card.resetDrawPileButton) return;
                    let currentPosition = card.getPosition()
                    card.storePosition(currentPosition);
-                   VARS.xyDiff.x = mousePoint.x - currentPosition.x;
-                   VARS.xyDiff.y = mousePoint.y - currentPosition.y;
-                   Utils.moveToTopOfVisualAssets(card, VARS.allVisualAssets);
+
+                   // FOCUS ON THESE THREE LINES HERE
+                   // VARS.xyDiff.x = mousePoint.x - currentPosition.x;
+                   // VARS.xyDiff.y = mousePoint.y - currentPosition.y;
+                   // Utils.moveToTopOfVisualAssets(card, VARS.allVisualAssets);
 
                } 
            }

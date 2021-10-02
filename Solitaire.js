@@ -4,6 +4,7 @@ import Deck from './cards/Deck.js';
 import MouseDown from './action/MouseDown.js';
 import MouseUp from './action/MouseUp.js';
 import Animate from './action/Animate.js';
+import Card from './cards/Card.js';
 const Solitaire = {
     canvas: undefined,
     init: function () {
@@ -11,8 +12,14 @@ const Solitaire = {
         VARS.init();
         this.canvas = VARS.canvas;
 
-        Deck.build();
-        Deal.start();
+        let AceHearts = Card().build("ace", "hearts", 1, 50, 50);
+        AceHearts.setClickability(true);
+        VARS.allVisualAssets.push(AceHearts);
+
+        let TwoHearts = Card().build("two", "hearts", 2, 200, 50);
+        TwoHearts.setClickability(true);
+        VARS.allVisualAssets.push(TwoHearts);
+
         this.addListeners();
         
         Animate.start();
