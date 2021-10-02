@@ -1,7 +1,6 @@
 import VARS from '../utils/Vars.js';
 import Utils from '../utils/Utils.js';
 import FlipPile from '../visualAssets/FlipPile.js';
-import DragContainer from '../visualAssets/DragContainer.js';
 const MoveCard = {
     moveCardListener: function(activeCard) {
 
@@ -12,7 +11,7 @@ const MoveCard = {
             if (Utils.rectangleRectangleCollisionDetection(card, activeCard)) {
 
                 let alternatingSuitAndOneLower = (card.color !== activeCard.color && card.rank === (activeCard.rank + 1));
-                let slotHit = card.rank === activeCard.rank && card.suit === activeCard.suit && card.slot && DragContainer.length() === 1;
+                let slotHit = card.rank === activeCard.rank && card.suit === activeCard.suit && card.slot;
 
                 if (slotHit || alternatingSuitAndOneLower || card.marker) {
                     return true;
@@ -33,22 +32,22 @@ const MoveCard = {
 
         let tempArray = (!flipPile) ? VARS.piles[_index] : FlipPile.arr;
 
-        DragContainer.arr.forEach((card, i) => {
-
+        // DragContainer.arr.forEach((card, i) => {
+            let card = VARS.activeCard;
             tempArray.splice(tempArray.indexOf(card), 1);
             let yPos = y;
 
             if (!slot) {
                 VARS.piles[pileKey].push(card);
                 card.setIndex(+pileKey);
-                yPos = y + (VARS.spacing.buffer_larger * (i + markerAdjust));
+                yPos = y + (VARS.spacing.buffer_larger * (markerAdjust));
             } else {
                 target.increaseSlotRank();
                 card.setClickability(false);
             }
 
             card.setPosition({ x, y: yPos });
-        })
+        // })
 
         this.revealNextCard(tempArray)
     },
