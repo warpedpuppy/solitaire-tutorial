@@ -5,6 +5,7 @@ const Solitaire = {
     init: function () {
 
         let AceHearts = Card().build("ace", "hearts", 0, 0, 0);
+        // AceHearts.reveal(false)
         VARS.allVisualAssets.push(AceHearts);
 
         let TwoHearts = Card().build("two", "hearts", 1, 175, 0);
