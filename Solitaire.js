@@ -1,6 +1,6 @@
 import VARS from './utils/Vars.js';
 import Animate from './action/Animate.js';
-import Card from './cards/Card.js';
+
 const Solitaire = {
     init: function () {
 
