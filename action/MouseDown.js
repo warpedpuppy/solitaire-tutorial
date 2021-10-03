@@ -7,7 +7,7 @@ const MouseDown = {
         let { mousePoint } = VARS;
         VARS.allVisualAssets.forEach( (card, i) => {
             
-           const { x, y, clickable, drawPile } = card;
+           const { x, y, clickable } = card;
            
            if (clickable) {
                let rect = {x, y, width: cardWidth, height: cardHeight};
@@ -15,7 +15,6 @@ const MouseDown = {
                if (hit) {
                    VARS.activeCard = card;
 
-                   if (card.resetDrawPileButton) return;
                    let currentPosition = card.getPosition()
                    card.storePosition(currentPosition);
 

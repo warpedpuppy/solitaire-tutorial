@@ -1,6 +1,4 @@
 import VARS from './utils/Vars.js';
-import Deal from './cards/Deal.js';
-import Deck from './cards/Deck.js';
 import MouseDown from './action/MouseDown.js';
 import MouseUp from './action/MouseUp.js';
 import Animate from './action/Animate.js';

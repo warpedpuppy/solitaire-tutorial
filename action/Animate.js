@@ -1,7 +1,6 @@
 import VARS from '../utils/Vars.js';
 import Utils from '../utils/Utils.js';
 const Animate = {
-    counter: 0,
     start: function() {
 
         const { mousePoint, xyDiff, ctx, canvas } = VARS;
