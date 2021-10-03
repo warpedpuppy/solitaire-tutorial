@@ -21,8 +21,6 @@ const Animate = {
                 let hit = Utils.pointRectangleCollisionDetection(mousePoint, rect);
                 over.push(hit);
             }
-            // let text = document.querySelector(`#rect${i}`);
-            // text.innerText = card;
 
             if (card === VARS.activeCard && !card.dragPile) {
                 let x = mousePoint.x - xyDiff.x;
