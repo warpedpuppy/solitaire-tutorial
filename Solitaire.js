@@ -8,6 +8,7 @@ const Solitaire = {
         VARS.init();
 
         Deck.build();
+        
         Deal.start();
 
         Animate.start();

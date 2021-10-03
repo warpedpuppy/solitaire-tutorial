@@ -1,7 +1,6 @@
 import VARS from '../utils/Vars.js';
-import Utils from '../utils/Utils.js';
 import FlipPile from './FlipPile.js'
-import Testing from '../utils/Testing.js'
+
 const DrawPile = {
     arr: [],
     resetButton: undefined,

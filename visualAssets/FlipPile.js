@@ -1,6 +1,3 @@
-import DrawPile from "./DrawPile.js";
-import VARS from "../utils/Vars.js";
-import Utils from '../utils/Utils.js';
 const FlipPile = {
     arr: [],
     allowReset: false,

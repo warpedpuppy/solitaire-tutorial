@@ -1,4 +1,3 @@
-import Deck from './Deck.js';
 import Marker from '../visualAssets/Marker.js';
 import Slot from '../visualAssets/Slot.js';
 import VARS from '../utils/Vars.js';
@@ -10,9 +9,10 @@ const Deal = {
     startY: 0,
     totalColumns: 7,
     xOffset: 0,
+    deck: [],
     start: function () {
         
-        VARS.deck = [...VARS.allVisualAssets]
+        this.deck = [...VARS.allVisualAssets]
 
 
         this.startX = VARS.build.cardWidth + VARS.spacing.buffer_larger;
@@ -27,7 +27,7 @@ const Deal = {
         DrawPile.createResetButton(xOffset, this.startY);
 
         // DRAW PILE
-        let arr = VARS.deck.slice(adjustedCardCounter, 52)
+        let arr = this.deck.slice(adjustedCardCounter, 52)
         DrawPile.create( arr, true, xOffset);
 
         // SLOTS 
