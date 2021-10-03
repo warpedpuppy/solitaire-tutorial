@@ -1,7 +1,7 @@
 import VARS from '../utils/Vars.js';
 import Utils from '../utils/Utils.js';
-import FlipPile from './FlipPile.js'
-import Testing from '../utils/Testing.js'
+import FlipPile from './FlipPile.js';
+import Testing from '../utils/Testing.js';
 const DrawPile = {
     arr: [],
     resetButton: undefined,
@@ -28,6 +28,8 @@ const DrawPile = {
 
         })
         topCard.setClickability(true);
+        
+        Testing.printCardsArray(arr)
     },
     createResetButton: function (xOffset, y) {
         let img = new Image();

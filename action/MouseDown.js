@@ -1,6 +1,5 @@
 import VARS from "../utils/Vars.js";
 import Utils from "../utils/Utils.js";
-import DragContainer from "../visualAssets/DragContainer.js";
 const MouseDown = {
     setActiveCard: function () {
         const { build } = VARS,
@@ -21,19 +20,6 @@ const MouseDown = {
                } 
            }
        })
-       this.moveVisualAssetsToTop();
-   },
-   moveVisualAssetsToTop: function () {
-
-       const { arr } = DragContainer;
-       if ( arr.length) {
-            arr.forEach((card, i) => {
-               card.storePosition();
-               let cardToShiftUp = Utils.moveToTopOfVisualAssets(card, VARS.allVisualAssets); 
-               cardToShiftUp.yOffset = i * VARS.spacing.buffer_larger;
-               i++;
-           })
-       }
    }
 }
 export default MouseDown;
