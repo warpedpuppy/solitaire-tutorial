@@ -2,11 +2,11 @@ import VARS from '../utils/Vars.js';
 
 export default class VisualAsset {
 
-    constructor (x,y, drawPile = false) {
+    constructor (x,y) {
         this.x = x;
         this.y = y;
         this.flipPile = false;
-        this.drawPile = drawPile;
+        this.drawPile = false;
         this.clickable = false;
         this.storePos = { x: 0, y: 0}
         this.height = VARS.build.cardHeight;
