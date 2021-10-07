@@ -37,19 +37,7 @@ const MouseDown = {
                } 
            }
        })
-       this.moveVisualAssetsToTop();
-   },
-   moveVisualAssetsToTop: function () {
-
-       const { arr } = DragContainer;
-       if ( arr.length) {
-            arr.forEach((card, i) => {
-               card.storePosition();
-               let cardToShiftUp = Utils.moveToTopOfVisualAssets(card, VARS.allVisualAssets); 
-               cardToShiftUp.yOffset = i * VARS.spacing.buffer_larger;
-               i++;
-           })
-       }
+       DragContainer.moveCardsToTop();
    }
 }
 export default MouseDown;

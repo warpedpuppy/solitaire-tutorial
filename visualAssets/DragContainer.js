@@ -1,3 +1,5 @@
+import VARS from '../utils/Vars.js';
+import Utils from '../utils/Utils.js';
 const DragContainer = {
     arr: [],
     add: function (card) {
@@ -19,6 +21,17 @@ const DragContainer = {
             card.yOffset = 0;
         });
         this.arr = []
+    },
+    moveCardsToTop: function () {
+       const { arr } = this;
+       if ( arr.length) {
+            arr.forEach((card, i) => {
+               card.storePosition();
+               let cardToShiftUp = Utils.moveToTopOfVisualAssets(card, VARS.allVisualAssets); 
+               cardToShiftUp.yOffset = i * VARS.spacing.buffer_larger;
+               i++;
+           })
+       }
     }
 }
 export default DragContainer;
