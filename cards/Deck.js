@@ -7,7 +7,7 @@ const Deck = {
         let value = 1;
         suits.forEach( (suit, i) => {
             ranks.forEach( (rank, j) => {
-                let card = Card().build(rank, suit, value, j * 50, i * 100);
+                let card = new Card(rank, suit, value, j * 50, i * 100);
                 allVisualAssets.push(card);
                 value ++;
             })

@@ -40,8 +40,7 @@ const Deal = {
         const { deck } = VARS;
 
         for (let i = 0; i < this.loopingQ; i++) { 
-           let marker = Marker();
-            marker.build(xOffset + (this.startX + (VARS.build.cardWidth + VARS.spacing.buffer) * i),this.startY, i);
+            let marker = new Marker(xOffset + (this.startX + (VARS.build.cardWidth + VARS.spacing.buffer) * i),this.startY, i);
             VARS.allVisualAssets.unshift(marker);
             VARS.piles[i] = [marker];
         }
@@ -62,7 +61,7 @@ const Deal = {
                
                 
                 let index = (this.totalColumns - this.loopingQ) + j;
- 
+
                 card.setIndex(index);
                 VARS.piles[index].push(card);
 
@@ -94,9 +93,7 @@ const Deal = {
             let imageString = `/bmps/slot${VARS.build.suits[i].charAt(0).toUpperCase()}${VARS.build.suits[i].substring(1, VARS.build.suits[i].length)}.png`; 
             let xVal = xOffset + ((VARS.build.cardWidth + VARS.spacing.slot_spacer) * i);
             let yVal = 10;
-            let slot = Slot();
-
-            slot.build(xVal, yVal, imageString, VARS.build.suits[i])
+            let slot = new Slot(xVal, yVal, imageString, VARS.build.suits[i])
            
             VARS.slots.push(slot);
             VARS.allVisualAssets.push(slot);

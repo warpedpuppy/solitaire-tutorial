@@ -10,10 +10,10 @@ const MoveCard = {
         let item = arr.find(card => {
 
             if (Utils.rectangleRectangleCollisionDetection(card, activeCard)) {
-
+   
                 let alternatingSuitAndOneLower = (card.color !== activeCard.color && card.rank === (activeCard.rank + 1));
                 let slotHit = card.rank === activeCard.rank && card.suit === activeCard.suit && card.slot && DragContainer.length() === 1;
-
+   
                 if (slotHit || alternatingSuitAndOneLower || card.marker) {
                     return true;
                 }
@@ -28,9 +28,11 @@ const MoveCard = {
     moveCard: function(target, activeCard) {
 
         let { x, y, _index: pileKey, slot, marker } = target;
+
+ 
         let { _index, flipPile } = activeCard;
         let markerAdjust = marker ? 0 : 1;
-
+ 
         let tempArray = (!flipPile) ? VARS.piles[_index] : FlipPile.arr;
 
         DragContainer.arr.forEach((card, i) => {
@@ -53,6 +55,7 @@ const MoveCard = {
         this.revealNextCard(tempArray)
     },
     revealNextCard: function(arr) {
+
         if (arr.length) {
             let newTopCard = Utils.returnLastArrayItem(arr);
 
@@ -61,6 +64,7 @@ const MoveCard = {
                 newTopCard.setClickability(true);
             }
         }
+
     }
 }
 export default MoveCard;

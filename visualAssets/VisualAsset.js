@@ -1,52 +1,47 @@
-class VisualAsset {
+import VARS from '../utils/Vars.js';
 
-    constructor () {
+export default class VisualAsset {
 
+    constructor (x,y, drawPile = false) {
+        this.x = x;
+        this.y = y;
+        this.flipPile = false;
+        this.drawPile = drawPile;
+        this.clickable = false;
+        this.storePos = { x: 0, y: 0}
+        this.height = VARS.build.cardHeight;
+        this.width = VARS.build.cardWidth;
+        this.img = new Image();
     }
-    
-    setPosition()
-        img: undefined,
-        rank: undefined,
-        suit: undefined,
-        color: undefined,
-        x: undefined,
-        y: undefined,
-        value: undefined,
-        clickable: false,
-        drawPile: false,
-        card: true,
-        build: function (rank, suit, value, x, y) {
-            this.rank = rank + 1;
-            this.suit = suit;
-            this.img = new Image();
-            this.cardFront = `bmps/card_bmps/${rank}_${suit}.png`;
-            this.cardBack =  `bmps/card_bmps/card_back.png`;
-            this.color = (suit === 'hearts' || suit === 'diamonds') ? "red" : "black" ;
-            this.value = value;
-            this.x = x;
-            this.y = y;
-            this.reveal(true);
-        },
-        setPivot: function (pivotObject) {
-            this.x -= pivotObject.x;
-            this.y -= pivotObject.y;
-        },
-        getPosition: function() {
-            return { x: this.x, y: this.y }
-        },
-        setPosition: function(positionObject) {
-            this.x = positionObject.x;
-            this.y = positionObject.y;
-        },
-        reveal: function (boolean) {
-            this.img.src = boolean ? this.cardFront : this.cardBack ;
-        },
-        setClickability: function (boolean) {
-            this.clickable = boolean;
-        },
-        setDrawPile: function (boolean) {
-            this.drawPile = boolean;
-        }
+    setPosition(obj) {
+        this.x = obj.x;
+        this.y = obj.y;
+    }
+    getPosition() {
+        return { x: this.x, y: this.y }
+    }
+    storePosition () {
+        this.storePos.x = this.x;
+        this.storePos.y = this.y;
+    }
+    resetPositionToStore () {
+        this.x = this.storePos.x;
+        this.y = this.storePos.y;
+    }
+    setPosition(positionObject) {
+        this.x = positionObject.x;
+        this.y = positionObject.y;
+    }
+    reveal(boolean) {
+        this.img.src = boolean ? this.cardFront : this.cardBack ;
+    }
+    setClickability(boolean) {
+        this.clickable = boolean;
+    }
+    setDrawPile(boolean) {
+        this.drawPile = boolean;
+    }
+    setFlipPile (boolean) {
+        this.flipPile = boolean;
     }
 }
-export default VisualAsset;

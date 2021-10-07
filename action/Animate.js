@@ -12,7 +12,6 @@ const Animate = {
         VARS.allVisualAssets.forEach(card => {
             const { img, x, y, clickable } = card;
 
-
             ctx.drawImage(img, x, y);
 
             if (clickable) {
