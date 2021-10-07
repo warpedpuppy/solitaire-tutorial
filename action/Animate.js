@@ -20,7 +20,7 @@ const Animate = {
                 over.push(hit);
             }
 
-            if (card === VARS.activeCard && !card.dragPile) {
+            if (card === VARS.activeCard && !card.drawPile && card.rank) {
                 let x = mousePoint.x - xyDiff.x;
                 let y = mousePoint.y - xyDiff.y;
                 card.setPosition({ x, y })
