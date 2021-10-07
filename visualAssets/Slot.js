@@ -1,6 +1,6 @@
-import VARS from "../utils/Vars.js";
 import VisualAsset from "./VisualAsset.js";
-export default class Slot extends VisualAsset{
+export default class Slot extends VisualAsset {
+
     constructor(x, y, imgString, suit) {
         super(x,y)
         this.img = new Image();
@@ -11,6 +11,7 @@ export default class Slot extends VisualAsset{
         this.card = false;
         this.rank = 1;
     }
+    
     increaseSlotRank () {
         this.rank++;
     }
