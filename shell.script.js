@@ -20,12 +20,13 @@
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        const { img, x, y } = AceHearts;
+        let { img, x, y } = AceHearts;
 
         ctx.drawImage(img, x, y);
         requestAnimationFrame(animate);
 
-        // ctx.drawImage(img, Math.random() * canvas.width, Math.random() * canvas.height);
+        // counter += 2;
+        // ctx.drawImage(img, x += counter, y += counter);
         // setTimeout(animate, 200)
        
 
