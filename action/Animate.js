@@ -11,7 +11,7 @@ const Animate = {
             ctx.drawImage(img, x, y);
         })
 
-        requestAnimationFrame(this.start)
+        requestAnimationFrame(() => this.start())
     }
 }
 export default Animate;
