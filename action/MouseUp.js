@@ -11,7 +11,6 @@ const MouseUp = {
         } else if (activeCard.drawPile) {
             DrawPile.clickHandler();
         } 
-
     }
 }
 export default MouseUp;

@@ -7,16 +7,13 @@ const MouseDown = {
         let { mousePoint } = VARS;
         VARS.allVisualAssets.forEach( (card, i) => {
             
-           const { x, y, clickable, drawPile } = card;
+           const { x, y, clickable } = card;
            
            if (clickable) {
                let rect = {x, y, width: cardWidth, height: cardHeight};
                let hit = Utils.pointRectangleCollisionDetection(mousePoint, rect);
                if (hit) {
                    VARS.activeCard = card;
-
-                   if (card.resetDrawPileButton) return;
-
                } 
            }
        })

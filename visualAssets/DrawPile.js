@@ -14,21 +14,18 @@ const DrawPile = {
             topCard;
 
         arr.forEach(card => {
-
             card.setDrawPile(true);
             card.setPosition({x, y: yVal});
             card.reveal(false);
-            
             yVal += 0.25;
             if (init) {
                 this.arr.push(card)
             };
-
             topCard = card;
-
         })
+
         topCard.setClickability(true);
-        
+    
         Testing.printCardsArray(arr)
     },
     createResetButton: function (xOffset, y) {
@@ -52,7 +49,6 @@ const DrawPile = {
 
         for (let i = 0; i < top3.length; i++) {
             let card = top3[i];
-
             Utils.moveToTopOfVisualAssets(card, VARS.allVisualAssets);
             card.setClickability(false);
             card.setDrawPile(false);
@@ -68,7 +64,6 @@ const DrawPile = {
             FlipPile.allowReset = true;
             this.resetButton.clickable = true;
         } else {
-
             let topFlipPileCard = Utils.returnLastArrayItem(this.arr)
             topFlipPileCard.setClickability(true);
         }
