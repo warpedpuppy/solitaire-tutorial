@@ -2,9 +2,6 @@ import VARS from "../utils/Vars.js";
 
 const Card =  function () {
     return {
-        img: undefined,
-        cardFront: undefined,
-        cardBack: undefined,
         rank: undefined,
         suit: undefined,
         color: undefined,
