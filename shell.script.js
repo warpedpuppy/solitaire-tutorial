@@ -27,7 +27,7 @@
 
         // counter += 2;
         // ctx.drawImage(img, x += counter, y += counter);
-        // setTimeout(animate, 200)
+        // setTimeout(animate, 100)
        
 
     }
