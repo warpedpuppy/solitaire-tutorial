@@ -35,13 +35,10 @@ const Card =  function () {
             this.width = VARS.build.cardWidth;
             this.height = VARS.build.cardHeight;
             this.reveal(true);
+            return this;
         },
         setIndex: function (index) {
             this._index = index;
-        },
-        setPivot: function (pivotObject) {
-            this.x -= pivotObject.x;
-            this.y -= pivotObject.y;
         },
         storePosition: function () {
             this.storeX = this.x;

@@ -8,8 +8,7 @@ const Deck = {
         let temp = []
         suits.forEach( (suit, i) => {
             ranks.forEach( (rank, j) => {
-                let card = Card();
-                card.build(rank, suit, value, j * 50, i * 100);
+                let card = Card().build(rank, suit, value, j * 50, i * 100);
                 allVisualAssets.push(card);
                 value ++;
             })
@@ -25,18 +24,6 @@ const Deck = {
           [arr[currentIndex], arr[randomIndex]] = [arr[randomIndex], arr[currentIndex]];
         }
         return arr;
-    },
-    layOutInGrid () {
-        let cardCounter = 0;
-        for (let i = 0; i < 4; i ++) {
-            for (let j = 0; j < 13; j ++) {
-                let card = VARS.deck[cardCounter]
-                card.setPosition({x: j * 50, y: i * 160})
-                card.addToGameBoard(VARS.gameBoard);
-                
-                cardCounter++;
-            }
-        }
     }
 
 }

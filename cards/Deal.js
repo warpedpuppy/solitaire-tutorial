@@ -14,7 +14,6 @@ const Deal = {
         
         this.deck = [...VARS.allVisualAssets]
 
-
         this.startX = VARS.build.cardWidth + VARS.spacing.buffer_larger;
         this.startY = VARS.build.cardHeight + VARS.spacing.buffer_larger;
 
@@ -37,7 +36,7 @@ const Deal = {
     },
     createCardPiles(xOffset) {
 
-        const { deck } = VARS;
+        const { deck } = this;
 
         for (let i = 0; i < this.loopingQ; i++) { 
            let marker = Marker();
@@ -55,14 +54,11 @@ const Deal = {
 
                 card = deck[this.cardCounter];
                 
-                
                 let x = xOffset + (this.startX + (VARS.build.cardWidth + VARS.spacing.buffer) * j);
                 let y = this.startY + (VARS.spacing.buffer * verticalSpacer);
                 card.setPosition({x, y})
                
-                
                 let index = (this.totalColumns - this.loopingQ) + j;
- 
                 card.setIndex(index);
                 VARS.piles[index].push(card);
 
