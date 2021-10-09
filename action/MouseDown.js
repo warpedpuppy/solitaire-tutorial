@@ -4,7 +4,7 @@ const MouseDown = {
     setActiveCardAndPopulateDragArray: function () {
 
         let { mousePoint } = VARS;
-        VARS.allVisualAssets.forEach( (card, i) => {
+        VARS.allVisualAssets.forEach( card => {
             
            const { x, y, clickable, width, height } = card;
            
