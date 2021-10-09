@@ -20,8 +20,8 @@ const Animate = {
             }
 
             if (card === VARS.activeCard && !card.drawPile) {
-                let x = mousePoint.x - xyDiff.x;
-                let y = mousePoint.y - xyDiff.y;
+                let x = mousePoint.x;// - xyDiff.x;
+                let y = mousePoint.y;// - xyDiff.y;
                 card.setPosition({ x, y })
             }
 
