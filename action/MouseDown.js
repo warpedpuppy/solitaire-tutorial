@@ -11,7 +11,7 @@ const MouseDown = {
            const { x, y, clickable, width, height } = card;
            
            if (clickable) {
-               let rect = {x, y, width, height};
+               let rect = { x, y, width, height };
                let hit = Utils.pointRectangleCollisionDetection(mousePoint, rect);
                if (hit) {
                    console.log("hit")
