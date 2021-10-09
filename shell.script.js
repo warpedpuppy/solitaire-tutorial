@@ -1,10 +1,7 @@
-
-
 (function(){
 
     const canvas = document.querySelector('canvas'),
           ctx = canvas.getContext('2d');
-
 
     let cardImage = new Image();
     cardImage.src = '/bmps/card_bmps/ace_hearts.png';
@@ -14,7 +11,8 @@
         x: 0,
         y: 0
     }
-    let counter = 0;
+
+    // let counter = 0;
 
     function animate () {
 
@@ -29,7 +27,6 @@
         // ctx.drawImage(img, x += counter, y += counter);
         // setTimeout(animate, 100)
        
-
     }
     animate();
 })()
