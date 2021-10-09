@@ -2,22 +2,6 @@ import VARS from "../utils/Vars.js";
 
 const Card =  function () {
     return {
-        rank: undefined,
-        suit: undefined,
-        color: undefined,
-        x: undefined,
-        y: undefined,
-        storeX: undefined,
-        storeY: undefined,
-        value: undefined,
-        clickable: false,
-        drawPile: false,
-        flipPile: false,
-        card: true,
-        width: undefined,
-        height: undefined,
-        _index: undefined,
-        dragYOffset: 0,
         build: function (rank, suit, value, x, y) {
             let indexOfRank = VARS.build.ranks.indexOf(rank);
             this.rank = indexOfRank + 1;
@@ -34,39 +18,8 @@ const Card =  function () {
             this.reveal(true);
             return this;
         },
-        setIndex: function (index) {
-            this._index = index;
-        },
-        setPivot: function (pivotObject) {
-            this.x -= pivotObject.x;
-            this.y -= pivotObject.y;
-        },
-        storePosition: function () {
-            this.storeX = this.x;
-            this.storeY = this.y;
-        },
-        resetPositionToStore: function () {
-            this.x = this.storeX;
-            this.y = this.storeY;
-        },
-        getPosition: function() {
-            return { x: this.x, y: this.y }
-        },
-        setPosition: function(positionObject) {
-            this.x = positionObject.x;
-            this.y = positionObject.y;
-        },
         reveal: function (boolean) {
             this.img.src = boolean ? this.cardFront : this.cardBack ;
-        },
-        setClickability: function (boolean) {
-            this.clickable = boolean;
-        },
-        setDrawPile: function (boolean) {
-            this.drawPile = boolean;
-        },
-        setFlipPile: function (boolean) {
-            this.flipPile = boolean;
         }
     }
 }
