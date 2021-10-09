@@ -11,13 +11,14 @@ canvas {
 }
 
 #data {
-    width: 500px;
     margin: 0 auto;
     font-weight: bold;
+    font-size: 40px;
 }
 
 #data li {
     margin-left: 25px;
+    display: inline-block;
 }
 
 .text {
