@@ -28,7 +28,6 @@ const Animate = {
                 card.setPosition({ x, y })
                 let card2 = i === 0 ? VARS.allVisualAssets[1] : VARS.allVisualAssets[0] ;
                 let obj = Utils.dataRErectangleRectangleCollisionDetection(card, card2)
-                console.log(obj)
                 for (let key in obj) {
                     document.querySelector(`#${key}`).innerText = !!obj[key];
                     if (!!obj[key]) {

@@ -1,31 +1,30 @@
 * {
+    font-family: 'Courier New', Courier, monospace;
     padding: 0;
     margin: 0;
-}
-
-body {
-    background-color: #CCC;
-    font-size: 18px;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-ul {
-    width: 450px;
-    margin: 0 auto;
+    text-align: center;
 }
 
 canvas {
     display: block;
     margin: 0 auto;
-    /* border: 1px solid green; */
+    border: 1px solid green;
+}
+
+#data {
+    margin: 0 auto;
+    font-weight: bold;
+    font-size: 30px;
+    display: inline-block;
+}
+
+#data li {
+    margin: 20px 25px;
+    text-align: left;
 }
 
 .text {
-    color: red;
-    display: inline-block;
-    margin: 0 10px;
-    font-weight: bold;
-    ;
+    color: red
 }
 
 .green {
