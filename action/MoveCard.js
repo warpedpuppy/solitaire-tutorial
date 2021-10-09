@@ -48,7 +48,7 @@ const MoveCard = {
 
         this.revealNextCard(tempArray)
     },
-    revealNextCard: function(arr) {
+    revealNextCard: function (arr) {
         if (arr.length) {
             let newTopCard = Utils.returnLastArrayItem(arr);
 
