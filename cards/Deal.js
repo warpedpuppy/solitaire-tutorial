@@ -26,28 +26,24 @@ const Deal = {
         DrawPile.createResetButton(xOffset, this.startY);
 
         // DRAW PILE
-        let arr = this.deck.slice(adjustedCardCounter, 52)
+        let arr = this.deck.slice(adjustedCardCounter, 52);
         DrawPile.create( arr, true, xOffset);
 
         // SLOTS 
         this.createSlots();
         
-      
     },
     createCardPiles(xOffset) {
 
         const { deck } = this;
 
         for (let i = 0; i < this.loopingQ; i++) { 
-           let marker = Marker();
-            marker.build(xOffset + (this.startX + (VARS.build.cardWidth + VARS.spacing.buffer) * i),this.startY, i);
+           let marker = Marker().build(xOffset + (this.startX + (VARS.build.cardWidth + VARS.spacing.buffer) * i),this.startY, i);
             VARS.allVisualAssets.unshift(marker);
             VARS.piles[i] = [marker];
         }
 
         let card, verticalSpacer = 0;
-
-        
 
         while (this.loopingQ > 0) {
             for (let j = 0; j < this.loopingQ; j++) {
@@ -79,7 +75,8 @@ const Deal = {
 
             this.startX += VARS.build.cardWidth + VARS.spacing.buffer;
         }
-        return { adjustedCardCounter: this.cardCounter, adjustedStartY: this.startY }
+
+        return { adjustedCardCounter: this.cardCounter }
     },
     createSlots() {
         let width = 0;

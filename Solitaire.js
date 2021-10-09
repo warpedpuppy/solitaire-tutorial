@@ -9,7 +9,7 @@ const Solitaire = {
 
         Deck.build();
         
-        // Deal.start();
+        Deal.start();
 
         Animate.start();
 

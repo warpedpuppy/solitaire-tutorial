@@ -19,6 +19,7 @@ const Marker =  function () {
             this.height = VARS.build.cardHeight;
             this.width = VARS.build.cardWidth;
             this._index = index;
+            return this;
         },
         getPosition: function() {
             return { x: this.x, y: this.y }
