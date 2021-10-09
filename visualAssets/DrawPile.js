@@ -26,7 +26,7 @@ const DrawPile = {
 
         topCard.setClickability(true);
     
-        Testing.printCardsArray(arr)
+        Testing.printCardsArray(arr);
     },
     createResetButton: function (xOffset, y) {
         let img = new Image();
@@ -57,6 +57,7 @@ const DrawPile = {
             card.setPosition(cardPosition);
             card.reveal(true);
         }
+        Testing.printCardsArray(top3);
 
         FlipPile.arr = [...FlipPile.arr, ...top3];
 
