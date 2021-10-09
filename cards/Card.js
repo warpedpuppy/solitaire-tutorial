@@ -39,10 +39,6 @@ const Card =  function () {
         setIndex: function (index) {
             this._index = index;
         },
-        setPivot: function (pivotObject) {
-            this.x -= pivotObject.x;
-            this.y -= pivotObject.y;
-        },
         storePosition: function () {
             this.storeX = this.x;
             this.storeY = this.y;
