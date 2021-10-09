@@ -2,6 +2,7 @@
     font-family: 'Courier New', Courier, monospace;
     padding: 0;
     margin: 0;
+    text-align: center;
 }
 
 canvas {
@@ -13,12 +14,13 @@ canvas {
 #data {
     margin: 0 auto;
     font-weight: bold;
-    font-size: 40px;
+    font-size: 30px;
+    display: inline-block;
 }
 
 #data li {
-    margin-left: 25px;
-    display: inline-block;
+    margin: 20px 25px;
+    text-align: left;
 }
 
 .text {

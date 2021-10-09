@@ -31,10 +31,10 @@ const Animate = {
 
             let xEnd = document.querySelector('#xEnd');
             if (mousePoint.x < x + rect.width) {
-                xEnd.innerText = `mouse point is to the right of the end of the card!`;
+                xEnd.innerText = `mouse point is to the left of the end of the card!`;
                 xEnd.classList.add('green')
             } else {
-                xEnd.innerText = `mouse point is to the left of the end of the card!`;
+                xEnd.innerText = `mouse point is to the right of the end of the card!`;
                 xEnd.classList.remove('green')
             }
 
