@@ -37,6 +37,8 @@ const DrawPile = {
             y,
             clickable: false,
             resetDrawPileButton: true,
+            width: VARS.build.cardWidth,
+            height: VARS.build.cardHeight
         }
         VARS.allVisualAssets.unshift(this.resetButton);
  
@@ -62,9 +64,11 @@ const DrawPile = {
         FlipPile.arr = [...FlipPile.arr, ...top3];
 
         if (this.arr.length === 0) {
+            console.log("here")
             FlipPile.allowReset = true;
             this.resetButton.clickable = true;
         } else {
+
             let topFlipPileCard = Utils.returnLastArrayItem(this.arr)
             topFlipPileCard.setClickability(true);
         }
