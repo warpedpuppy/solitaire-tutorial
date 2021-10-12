@@ -9,8 +9,12 @@ const MoveCard = {
 
         let item = arr.find(card => {
 
-            if (Utils.rectangleRectangleCollisionDetection(card, activeCard)) {
-   
+            let rect1 = card.returnData();
+            let rect2 = activeCard.returnData();
+           
+
+            if (Utils.rectangleRectangleCollisionDetection(rect1, rect2)) {
+               
                 let alternatingSuitAndOneLower = (card.color !== activeCard.color && card.rank === (activeCard.rank + 1));
                 let slotHit = card.rank === activeCard.rank && card.suit === activeCard.suit && card.slot && DragContainer.length() === 1;
    
@@ -26,8 +30,9 @@ const MoveCard = {
 
     },
     moveCard: function(target, activeCard) {
-
-        let { x, y, _index: pileKey, slot, marker } = target;
+        
+        let { x, y } = target.returnData();
+        let {_index: pileKey, slot, marker } = target;
 
  
         let { _index, flipPile } = activeCard;

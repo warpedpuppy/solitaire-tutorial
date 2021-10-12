@@ -8,7 +8,7 @@ const MouseDown = {
         let { mousePoint } = VARS;
         VARS.allVisualAssets.forEach( (card, i) => {
             
-           const { x, y, clickable, drawPile } = card;
+           const { x, y, clickable, drawPile } = card.returnData();
            
            if (clickable) {
                let rect = {x, y, width: cardWidth, height: cardHeight};
@@ -18,8 +18,8 @@ const MouseDown = {
 
                    if (card.resetDrawPileButton) return;
 
-                   VARS.xyDiff.x = mousePoint.x - card.x;
-                   VARS.xyDiff.y = mousePoint.y - card.y;
+                   VARS.xyDiff.x = mousePoint.x - x;
+                   VARS.xyDiff.y = mousePoint.y - y;
 
                    DragContainer.reset();
 

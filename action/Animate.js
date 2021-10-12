@@ -10,8 +10,8 @@ const Animate = {
         let over = [];
 
         VARS.allVisualAssets.forEach(card => {
-            const { img, x, y, clickable } = card;
 
+            const { img, x, y, clickable } = card.returnData();
             ctx.drawImage(img, x, y);
 
             if (clickable) {

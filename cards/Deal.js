@@ -75,7 +75,6 @@ const Deal = {
                 }
 
                 this.cardCounter++;
-                // card.addToGameBoard();
             }
 
             verticalSpacer++;

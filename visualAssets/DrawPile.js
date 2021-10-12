@@ -1,6 +1,7 @@
 import VARS from '../utils/Vars.js';
 import Utils from '../utils/Utils.js';
-import FlipPile from './FlipPile.js'
+import FlipPile from './FlipPile.js';
+import Marker from './Marker.js';
 import Testing from '../utils/Testing.js'
 const DrawPile = {
     arr: [],
@@ -30,15 +31,11 @@ const DrawPile = {
         topCard.setClickability(true);
     },
     createResetButton: function (xOffset, y) {
-        let img = new Image();
-        img.src = '/bmps/marker.png';
-        this.resetButton = {
-            img,
-            x: xOffset,
-            y,
-            clickable: false,
-            resetDrawPileButton: true,
-        }
+
+        this.resetButton = new Marker(xOffset, y, 0);
+
+        this.resetButton.resetDrawPileButton = true;
+     
         VARS.allVisualAssets.unshift(this.resetButton);
  
     },
