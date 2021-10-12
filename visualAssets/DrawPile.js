@@ -38,6 +38,8 @@ const DrawPile = {
             y,
             clickable: false,
             resetDrawPileButton: true,
+            width: VARS.build.cardWidth,
+            height: VARS.build.cardHeight
         }
         VARS.allVisualAssets.unshift(this.resetButton);
  
