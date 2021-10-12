@@ -9,6 +9,6 @@ export default class Marker extends VisualAsset {
         this.slot = false;
         this.card = false;
     }
-
+    whoAmI(){ console.log("i am marker")}
 
 }

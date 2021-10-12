@@ -15,6 +15,7 @@ export default class VisualAsset {
         this.width = VARS.build.cardWidth;
         this.img = new Image();
     }
+    whoAmI(){}
     returnData() {
         return {
             img: this.img, 

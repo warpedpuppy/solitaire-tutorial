@@ -17,16 +17,9 @@ export default class Card extends VisualAsset {
             this.marker = false;
             this.card = true;
         }
-        returnData() {
-            return {
-                img: this.img, 
-                x: this.#x, 
-                y: this.#y, 
-                clickable: this.clickable,
-                width: this.width,
-                height: this.height,
-            }
-        }
+
+        whoAmI(){ console.log("i am card")}
+        
         setIndex(index) {
             this._index = index;
         }

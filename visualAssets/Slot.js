@@ -11,7 +11,9 @@ export default class Slot extends VisualAsset {
         this.card = false;
         this.rank = 1;
     }
-    
+
+    whoAmI(){ console.log("i am slot")}
+
     increaseSlotRank () {
         this.rank++;
     }
