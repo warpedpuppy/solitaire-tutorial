@@ -12,7 +12,7 @@ const Deck = {
                 value ++;
             })
         })
-        VARS.allVisualAssets = this.shuffle(VARS.allVisualAssets)
+        // VARS.allVisualAssets = this.shuffle(VARS.allVisualAssets)
     },
     shuffle: function(arr) {
         let currentIndex = arr.length,  randomIndex;
