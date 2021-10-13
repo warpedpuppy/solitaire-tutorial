@@ -5,7 +5,8 @@
 
     let cardImage = new Image();
     cardImage.src = '/bmps/card_bmps/ace_hearts.png';
-
+    console.log(cardImage);
+    
     let AceHearts = {
         img: cardImage,
         x: 0,
