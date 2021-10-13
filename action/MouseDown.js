@@ -3,15 +3,14 @@ import Utils from "../utils/Utils.js";
 import DragContainer from "../visualAssets/DragContainer.js";
 const MouseDown = {
     setActiveCardAndPopulateDragArray: function () {
-        const { build } = VARS,
-            { cardWidth, cardHeight } = build;
+
         let { mousePoint } = VARS;
-        VARS.allVisualAssets.forEach( (card, i) => {
+        VARS.allVisualAssets.forEach( card => {
             
-           const { x, y, clickable, drawPile } = card;
+           const { x, y, clickable, width, height, drawPile } = card;
            
            if (clickable) {
-               let rect = {x, y, width: cardWidth, height: cardHeight};
+               let rect = {x, y, width, height };
                let hit = Utils.pointRectangleCollisionDetection(mousePoint, rect);
                if (hit) {
                    VARS.activeCard = card;
@@ -32,7 +31,7 @@ const MouseDown = {
                        }
 
                    } else if (!drawPile) {
-                        DragContainer.add(VARS.activeCard)
+                        DragContainer.add(VARS.activeCard); // if flip pile
                    }
                } 
            }
