@@ -12,7 +12,7 @@ const Deck = {
                 value ++;
             })
         })
-        // VARS.allVisualAssets = this.shuffle(VARS.allVisualAssets)
+        VARS.allVisualAssets = this.shuffle(VARS.allVisualAssets)
     },
     shuffle: function(arr) {
         let currentIndex = arr.length,  randomIndex;
@@ -23,19 +23,6 @@ const Deck = {
           [arr[currentIndex], arr[randomIndex]] = [arr[randomIndex], arr[currentIndex]];
         }
         return arr;
-    },
-    layOutInGrid () {
-        let cardCounter = 0;
-        for (let i = 0; i < 4; i ++) {
-            for (let j = 0; j < 13; j ++) {
-                let card = VARS.deck[cardCounter]
-                card.setPosition({x: j * 50, y: i * 160})
-                card.addToGameBoard(VARS.gameBoard);
-                
-                cardCounter++;
-            }
-        }
     }
-
 }
 export default Deck;
