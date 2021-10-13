@@ -32,6 +32,7 @@ const Solitaire = {
         this.canvas.addEventListener('mousemove', e => {
             let leftOffset = (window.innerWidth - VARS.canvas.width) / 2;
             VARS.mousePoint = {x: e.pageX - leftOffset, y: e.pageY};
+            console.log(VARS.mousePoint)
          })
     },
     mouseDownHandler: function () {
