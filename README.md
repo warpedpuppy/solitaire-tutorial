@@ -1,5 +1,10 @@
 # SOLITAIRE TUTORIAL
 
+1. intro
+    - animation engines
+    - review final product and features
+    - share git link
+    - say at the end we will introduce the oop principles
 1. step-one-a
     - introduction to the canvas element
 1. step-one
