@@ -7,6 +7,7 @@
     - say at the end we will introduce the oop principles
 1. step-one-a
     - introduction to the canvas element
+    - chrome rendering 
 1. step-one
     - splitting into separate objects
 1. step-two
@@ -26,13 +27,14 @@
     - the testing class
     - the flip pile
 1. step-six-a
-    - drage
+    - drag
     - offest value
     - order of rendering
 1. step-six
     - drag applied
     - tests that isn't draw pile
     - mouse up: store position & restore position
+    - mouseout handler
 1. step-seven-a
     - rectangle / rectange collision detection
 1. step-seven
