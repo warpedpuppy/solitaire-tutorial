@@ -38,6 +38,9 @@ const Solitaire = {
         this.canvas.addEventListener('mouseup', e => {
             if (VARS.activeCard) MouseUp.activeCardExists();
         });
+        this.canvas.addEventListener('mouseout', e => {
+            if (VARS.activeCard) MouseUp.activeCardExists();
+        });
     }
 }
 export default Solitaire
