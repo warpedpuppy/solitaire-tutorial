@@ -44,3 +44,5 @@
 1. step-eight
     - multiple card move
     - drag container
+1. step-nine
+    - convert card factory function to card class
