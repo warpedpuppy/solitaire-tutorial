@@ -22,6 +22,7 @@ const Solitaire = {
         this.mouseMoveHandler();
         this.mouseDownHandler();
         this.mouseUpHandler();
+        this.mouseOutHandler();
     },
     mouseMoveHandler: function () {
         this.canvas.addEventListener('mousemove', e => {
@@ -38,6 +39,8 @@ const Solitaire = {
         this.canvas.addEventListener('mouseup', e => {
             if (VARS.activeCard) MouseUp.activeCardExists();
         });
+    },
+    mouseOutHandler: function () {
         this.canvas.addEventListener('mouseout', e => {
             if (VARS.activeCard) MouseUp.activeCardExists();
         });

@@ -5,9 +5,9 @@ import DragContainer from '../visualAssets/DragContainer.js';
 const MoveCard = {
     moveCardListener: function(activeCard) {
 
-        let arr = [...VARS.slots, ...Object.keys(VARS.piles).map(item => Utils.returnLastArrayItem(VARS.piles[item]))];
+        let possibleDestinationCards = [...VARS.slots, ...Object.keys(VARS.piles).map(item => Utils.returnLastArrayItem(VARS.piles[item]))];
 
-        let item = arr.find(card => {
+        let target = possibleDestinationCards.find(card => {
 
             if (Utils.rectangleRectangleCollisionDetection(card, activeCard)) {
 
@@ -21,7 +21,7 @@ const MoveCard = {
 
         })
 
-        return item ? { hit: true, target: item } : { hit: false };
+        return target ? { hit: true, target } : { hit: false };
 
 
     },
