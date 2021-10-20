@@ -4,6 +4,7 @@ import Deck from './cards/Deck.js';
 import MouseDown from './action/MouseDown.js';
 import MouseUp from './action/MouseUp.js';
 import Animate from './action/Animate.js';
+import ResizeHandler from './utils/ResizeHandler.js';
 const Solitaire = {
     canvas: undefined,
     init: function () {
@@ -23,6 +24,7 @@ const Solitaire = {
         this.mouseDownHandler();
         this.mouseUpHandler();
         this.mouseOutHandler();
+        this.resizeHandler();
     },
     mouseMoveHandler: function () {
         this.canvas.addEventListener('mousemove', e => {
@@ -44,6 +46,11 @@ const Solitaire = {
         this.canvas.addEventListener('mouseout', e => {
             if (VARS.activeCard) MouseUp.activeCardExists();
         });
+    },
+    resizeHandler: function () {
+        window.addEventListener('resize', e => {
+            ResizeHandler.resize();
+        })
     }
 }
 export default Solitaire
