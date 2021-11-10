@@ -1,5 +1,9 @@
 # SOLITAIRE TUTORIAL
 
+## created for tutorial web seminar given by CareerFoundry
+
+## this tutorial can be viewed [here](https://www.youtube.com/watch?v=hasFnKRrT0Y&t=3717s)
+
 1. intro
     - animation engines
     - review final product and features
