@@ -1,6 +1,6 @@
 # SOLITAIRE TUTORIAL
 
-## created for tutorial web seminar given by CareerFoundry
+## created for tutorial web seminar hosted by CareerFoundry, presented by me, Ted Walther
 
 ## this tutorial can be viewed [here](https://www.youtube.com/watch?v=hasFnKRrT0Y&t=3717s)
 
